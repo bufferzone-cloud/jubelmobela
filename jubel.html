@@ -3,124 +3,793 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jubel Mobela | Tech Entrepreneur</title>
-    <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        :root {
+            --primary-blue: #6366f1;
+            --primary-purple: #8b5cf6;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 14px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+            padding-bottom: 60px; /* Space for bottom nav */
+        }
+
+        /* App-like Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 0.8rem 1rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: none; /* Hidden on mobile, shown via bottom nav */
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--card-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.8rem 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.7rem;
+            transition: color 0.3s;
+        }
+
+        .nav-item.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Home Section */
+        #home {
+            padding: 4rem 1rem 1rem;
+            min-height: 100vh;
+        }
+
+        .home-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .profile-img-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .hero-title span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .blue {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .contact-options {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .professional-tagline {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .tour-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tour-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .tour-btn.outline {
+            background: transparent;
+            border: 1px solid var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        /* Sections */
+        section {
+            padding: 2rem 1rem;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+        }
+
+        .card p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Companies Section */
+        .companies-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .company-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--primary-purple));
+        }
+
+        .phone-frame {
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .phone-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .company-description ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.8rem;
+        }
+
+        .company-description li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.2rem;
+            font-size: 0.8rem;
+        }
+
+        .company-description li:before {
+            content: "•";
+            color: var(--primary-blue);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Education & Experience */
+        .education-timeline, .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .education-item, .timeline-item {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .education-item:before, .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+        }
+
+        .education-item:after, .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 1.2rem;
+            width: 2px;
+            height: calc(100% - 0.5rem);
+            background: var(--border-color);
+        }
+
+        .education-item:last-child:after, .timeline-item:last-child:after {
+            display: none;
+        }
+
+        .timeline-item h4 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .timeline-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-item li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.2rem;
+            font-size: 0.8rem;
+        }
+
+        .timeline-item li:before {
+            content: "▸";
+            color: var(--primary-blue);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-purple);
+        }
+
+        .skill-item {
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-item h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-dark);
+        }
+
+        .skill-item p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Languages */
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .language-item {
+            text-align: center;
+            padding: 1rem 0.5rem;
+        }
+
+        .language-item i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.8rem;
+        }
+
+        .language-item h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            transition: width 1s ease-in-out;
+        }
+
+        /* Hobbies */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .hobby-item {
+            text-align: center;
+            padding: 1rem 0.5rem;
+            border-radius: 8px;
+            background: var(--card-bg);
+            transition: transform 0.3s;
+        }
+
+        .hobby-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .hobby-item i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .hobby-item h4 {
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .hobby-item p {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        /* Autobiography */
+        .bio-content {
+            max-height: 300px;
+            overflow: hidden;
+            position: relative;
+            transition: max-height 0.5s ease;
+        }
+
+        .bio-content.expanded {
+            max-height: 2000px;
+        }
+
+        .bio-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-size: 0.85rem;
+        }
+
+        .read-more {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .read-more:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Contact */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            border-radius: 50%;
+        }
+
+        .contact-details h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-details p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            margin: 1rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal h3 {
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--primary-blue);
+        }
+
+        .modal-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .modal-socials a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .modal-socials a:hover {
+            transform: translateY(-3px);
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-form input,
+        .modal-form textarea {
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+            
+            .nav-links {
+                display: flex;
+                gap: 1.5rem;
+            }
+            
+            .nav-links a {
+                text-decoration: none;
+                color: var(--text-dark);
+                font-size: 0.9rem;
+                transition: color 0.3s;
+            }
+            
+            .nav-links a:hover {
+                color: var(--primary-blue);
+            }
+            
+            section {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .language-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .hobbies-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        /* Animation for scroll-triggered elements */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-   <nav class="navbar">
-  <div class="nav-left">
-    <div class="logo">Jubel Mobela</div>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#about">Companies</a>
-      <a href="#education">Education</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#languages">Languages</a>
-      <a href="#hobbies">Hobbies</a>
-      <a href="#autobiography">Autobiography</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="logo">Jubel Mobela</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#companies">Companies</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-  
-</nav>
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div class="home-container">
+            <div class="profile-img-container">
+                <img src="zamlift.jpg" alt="Portrait of Jubel Mobela">
+            </div>
+            
+            <h1 class="hero-title">
+                Jubel Mobela<br>
+                <span>
+                    Founder & CEO of 
+                    <span class="blue">BUFFER ZONE</span>,
+                    <span class="blue">ZATRALO</span>, &
+                    <span class="blue">Mirror House</span>
+                </span>
+            </h1>
+            
+            <div class="contact-options">
+                <a href="https://www.facebook.com/mcjubeldrake.mobela" class="social-icon" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/yourusername" class="social-icon" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/yourusername" class="social-icon" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://wa.me/260768658484" class="social-icon" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:jubelmobz19@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <p class="professional-tagline">
+                Results-driven <strong>IT Technician</strong> with expertise in <strong>troubleshooting</strong>,
+                <strong>system administration</strong>, and <strong>network management</strong>.
+            </p>
+            
+            <div class="action-buttons">
+                <a href="jubel_mobela_cv.pdf" download="Jubel_Mobela_CV.pdf" class="tour-btn"><i class="fas fa-download"></i> Download CV</a>
+                <button class="tour-btn outline" onclick="showModal()"><i class="fas fa-briefcase"></i> Hire Me</button>
+            </div>
+        </div>
+    </section>
 
-
- <section id="home">
-  <div class="home-container">
-    <!-- Left Side -->
-    <div class="home-left">
-      <h1 class="hero-title">
-        Jubel Mobela<br>
-        <span>
-  Founder & CEO of 
-  <span class="blue">BUFFER ZONE</span> A Graphic Design and Tech Company,<br>
-   
-  <span class="blue">Zambia Transport Logistics (Zatralo)</span> An Online Bus Ticket Booking Platform,<br>
-  <span class="blue">Mirror House (M.H)</span> A motivational and therapy website,
-</span>
-      </h1>
-    </div>
-
-    <!-- Center -->
-    <div class="home-center">
-      <div class="profile-img-container">
-        <img src="zamlift.jpg" alt="Portrait of Jubel Mobela">
-      </div>
-      <div class="contact-options">
-        <a href="https://www.facebook.com/mcjubeldrake.mobela" class="social-icon" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.instagram.com/yourusername" class="social-icon" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/yourusername" class="social-icon" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://wa.me/260768658484" class="social-icon" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="mailto:jubelmobz19@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
-      </div>
-
-<div class="nav-center">
-   <a href="jubel_mobela_cv.pdf" download="Jubel_Mobela_CV.pdf" class="tour-btn">Download CV</a>
-
-  </div>
-    </div>
-
-    <!-- Right Side -->
-    <div class="home-right">
-      <p class="professional-tagline">
-        Results-driven <strong>IT Technician</strong> with expertise in <strong>troubleshooting</strong>,
-        <strong>system administration</strong>, and <strong>network management</strong>. Skilled in resolving technical issues,
-        ensuring system security, and providing excellent user support. Also a passionate <strong>graphic designer</strong> and
-        <strong>dedicated web developer</strong>, focused on optimizing technology for efficiency, creativity, and reliability.
-      </p>
-      <button class="tour-btn" onclick="showModal()">Hire me</button>
-    </div>
-  </div>
-</section>
-
-
-
-    <!-- About Section -->
-    <section id="about">
+    <!-- Companies Section -->
+    <section id="companies">
         <h2 class="section-title">Companies</h2>
         <div class="companies-grid">
-            <div class="company-card">
+            <div class="card company-card">
                 <div class="phone-frame">
                     <img src="bufferzone.jpg" alt="Buffer Zone App Screenshot">
                 </div>
                 <h3>BUFFER ZONE</h3>
                 <p><strong>Creative Design & Web Development Studio</strong></p>
                 <div class="company-description">
-                    <p><strong>BUFFER ZONE</strong> is a <strong>graphic design</strong> and <strong>web development</strong> company based in Ndola and Luanshya, Zambia. With the tagline <strong>"Where pixels and code create magic,"</strong> the company specializes in delivering <strong>visually compelling</strong> and <strong>technically sound</strong> digital solutions.</p>
+                    <p><strong>BUFFER ZONE</strong> is a <strong>graphic design</strong> and <strong>web development</strong> company based in Ndola and Luanshya, Zambia.</p>
                     <ul>
                         <li><strong>50% down payment</strong> before project initiation</li>
                         <li>Payments via <strong>MTN/Airtel Mobile Money</strong></li>
-                        <li>Invoices include <strong>deposit payment instructions</strong></li>
                     </ul>
                 </div>
-                <a href="https://205.206.225.114/bufferzone/Home.html" class="tour-button" target="205.206.225.114/bufferzone/Home.html">Visit Website</a>
+                <a href="https://205.206.225.114/bufferzone/Home.html" class="tour-btn" target="_blank" style="display: block; text-align: center; margin-top: 1rem;">Visit Website</a>
             </div>
 
-            <div class="company-card">
+            <div class="card company-card">
                 <div class="phone-frame">
                     <img src="zatralo.jpg" alt="ZATRALO App Screenshot">
                 </div>
                 <h3>ZATRALO</h3>
                 <p><strong>Transport-Tech Startup Platform</strong></p>
                 <div class="company-description">
-                    <p><strong>ZATRALO</strong> (Zambia Transport Logistics) is a <strong>digital platform</strong> enabling <strong>convenient online bus ticket booking</strong> through website and mobile app. We connect travelers with <strong>reliable operators</strong> nationwide.</p>
+                    <p><strong>ZATRALO</strong> (Zambia Transport Logistics) is a <strong>digital platform</strong> enabling <strong>convenient online bus ticket booking</strong>.</p>
                     <ul>
                         <li>Buy bus tickets <strong>any where around</strong> the country</li>
-                        <li>Pay with <strong>MTN, Airtel or Zamtel</strong> local networks <strong>mobile money</strong></li>
+                        <li>Pay with <strong>mobile money</strong></li>
                         <li>Save, Print or share <strong>your DIGITAL TICKET</strong></li>
                     </ul>
                 </div>
-                <a href="https://zatralo.com" class="tour-button" target="_blank">Visit Platform</a>
+                <a href="https://zatralo.com" class="tour-btn" target="_blank" style="display: block; text-align: center; margin-top: 1rem;">Visit Platform</a>
             </div>
         </div>
     </section>
@@ -129,25 +798,25 @@
     <section id="education">
         <h2 class="section-title">Education</h2>
         <div class="education-timeline">
-            <div class="education-item">
+            <div class="card education-item">
                 <h3>Luso Private School</h3>
                 <p>Grades 1 – 5</p>
-                <p>Developed foundational literacy, numeracy, and problem-solving skills in a structured learning environment</p>
+                <p>Developed foundational literacy, numeracy, and problem-solving skills</p>
             </div>
             
-            <div class="education-item">
+            <div class="card education-item">
                 <h3>Nkana Basic School</h3>
                 <p>Grades 5 – 7 (2013)</p>
                 <p>Junior Secondary Certificate with focus on Mathematics, English, and Science</p>
             </div>
 
-            <div class="education-item">
+            <div class="card education-item">
                 <h3>Malela Secondary School</h3>
                 <p>Grade 12 Certificate (2018)</p>
-                <p>Emphasis on science and technology subjects, demonstrated academic discipline and leadership</p>
+                <p>Emphasis on science and technology subjects, demonstrated academic discipline</p>
             </div>
 
-            <div class="education-item">
+            <div class="card education-item">
                 <h3>Northern Technical College (NORTEC)</h3>
                 <p>Diploma in Computer Systems Engineering (2023)</p>
                 <p>Awarded Best Student of 2023 for academic excellence and technical performance</p>
@@ -159,8 +828,7 @@
     <section id="experience">
         <h2 class="section-title">Professional Experience</h2>
         <div class="timeline">
-            <div class="timeline-item">
-                
+            <div class="card timeline-item">
                 <h3>ZAMLIFT</h3>
                 <h4>I.T Technician / Customer Care | 2024 – Present</h4>
                 <ul>
@@ -170,8 +838,7 @@
                 </ul>
             </div>
 
-            <div class="timeline-item">
-                
+            <div class="card timeline-item">
                 <h3>BEM MOTORS</h3>
                 <h4>Auditor / I.T Technician Assistant | 2020 – 2021</h4>
                 <ul>
@@ -181,8 +848,7 @@
                 </ul>
             </div>
 
-            <div class="timeline-item">
-                
+            <div class="card timeline-item">
                 <h3>LUSO PRIVATE SCHOOL</h3>
                 <h4>Teacher / I.T Technician | 2019 – 2020</h4>
                 <ul>
@@ -198,7 +864,7 @@
     <section id="skills">
         <h2 class="section-title">Technical Skills</h2>
         <div class="skills-grid">
-            <div class="skill-category">
+            <div class="card skill-category">
                 <h3>Technical Expertise</h3>
                 <div class="skill-item">
                     <h4>Network Administration</h4>
@@ -214,7 +880,7 @@
                 </div>
             </div>
 
-            <div class="skill-category">
+            <div class="card skill-category">
                 <h3>Development</h3>
                 <div class="skill-item">
                     <h4>Web Development</h4>
@@ -230,7 +896,7 @@
                 </div>
             </div>
 
-            <div class="skill-category">
+            <div class="card skill-category">
                 <h3>Design & Support</h3>
                 <div class="skill-item">
                     <h4>Graphic Design</h4>
@@ -248,45 +914,42 @@
         </div>
     </section>
 
-
-     <!-- Languages Section -->
-<section id="languages">
-  <h2 class="section-title">Languages</h2>
-  <div class="language-grid">
-    <div class="language-item native" data-percent="100">
-      <i class="fas fa-flag-usa"></i>
-      <h4>English</h4>
-      <div class="progress-bar"><div class="progress-fill"></div></div>
-    </div>
-    <div class="language-item fluent" data-percent="90">
-      <i class="fas fa-comment-dots"></i>
-      <h4>Bemba</h4>
-      <div class="progress-bar"><div class="progress-fill"></div></div>
-    </div>
-    <div class="language-item beginner" data-percent="40">
-      <i class="fas fa-volume-down"></i>
-      <h4>Nyanja</h4>
-      <div class="progress-bar"><div class="progress-fill"></div></div>
-    </div>
-    <div class="language-item conversational" data-percent="65">
-      <i class="fas fa-handshake"></i>
-      <h4>Lamba</h4>
-      <div class="progress-bar"><div class="progress-fill"></div></div>
-    </div>
-    <div class="language-item conversational" data-percent="65">
-      <i class="fas fa-comments"></i>
-      <h4>French</h4>
-      <div class="progress-bar"><div class="progress-fill"></div></div>
-    </div>
-    <div class="language-item conversational" data-percent="65">
-      <i class="fas fa-globe-europe"></i>
-      <h4>Spanish</h4>
-      <div class="progress-bar"><div class="progress-fill"></div></div>
-    </div>
-  </div>
-</section>
-
-
+    <!-- Languages Section -->
+    <section id="languages">
+        <h2 class="section-title">Languages</h2>
+        <div class="language-grid">
+            <div class="card language-item" data-percent="100">
+                <i class="fas fa-flag-usa"></i>
+                <h4>English</h4>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+            <div class="card language-item" data-percent="90">
+                <i class="fas fa-comment-dots"></i>
+                <h4>Bemba</h4>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+            <div class="card language-item" data-percent="40">
+                <i class="fas fa-volume-down"></i>
+                <h4>Nyanja</h4>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+            <div class="card language-item" data-percent="65">
+                <i class="fas fa-handshake"></i>
+                <h4>Lamba</h4>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+            <div class="card language-item" data-percent="65">
+                <i class="fas fa-comments"></i>
+                <h4>French</h4>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+            <div class="card language-item" data-percent="65">
+                <i class="fas fa-globe-europe"></i>
+                <h4>Spanish</h4>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+        </div>
+    </section>
 
     <!-- Hobbies Section -->
     <section id="hobbies">
@@ -305,7 +968,7 @@
             <div class="hobby-item">
                 <i class="fas fa-pen-nib"></i>
                 <h4>Poetry</h4>
-                <p>Emotional exprsession and rhyming</p>
+                <p>Emotional expression and rhyming</p>
             </div>
             <div class="hobby-item">
                 <i class="fas fa-running"></i>
@@ -325,176 +988,255 @@
         </div>
     </section>
 
-<!-- Autobiography Section -->
-<section id="autobiography">
-  <h2 class="section-title">My Journey</h2>
-  <div class="bio-content">
-    <div class="bio-excerpt" id="bioExcerpt">
-      <p><strong>Every Breath is a Second Chance: The Autobiography of Jubel Mobela</strong></p>
+    <!-- Autobiography Section -->
+    <section id="autobiography">
+        <h2 class="section-title">My Journey</h2>
+        <div class="card bio-content" id="bioContent">
+            <p><strong>Every Breath is a Second Chance: The Autobiography of Jubel Mobela</strong></p>
 
-      <p>My name is <strong>Jubel Mobela</strong>, and this is my story—a journey shaped by struggle, lifted by hope, and driven by the belief that <strong>every breath is a second chance</strong>. From humble beginnings in Luanshya, Zambia, to the foundation of growing tech enterprises, my life has never followed a straight path. But in every setback, I've found <strong>renewal</strong>. In every hardship, a <strong>lesson</strong>. And in every moment of uncertainty, a <strong>second chance</strong> to rise again.</p>
-      
-      <button class="read-more" onclick="expandBio()">
-        <i class="fas fa-book-open"></i> Read More About My Journey
-      </button>
-    </div>
+            <p>My name is <strong>Jubel Mobela</strong>, and this is my story—a journey shaped by struggle, lifted by hope, and driven by the belief that <strong>every breath is a second chance</strong>. From humble beginnings in Luanshya, Zambia, to the foundation of growing tech enterprises, my life has never followed a straight path.</p>
+            
+            <button class="read-more" onclick="expandBio()">
+                <i class="fas fa-book-open"></i> Read More About My Journey
+            </button>
+        </div>
+    </section>
 
-    <div class="bio-full" id="bioFull" style="display:none;">
-
-      <p><strong>Chapter 1: A Childhood in Motion</strong></p>
-      <p>I was born on <strong>July 21, 2002</strong>, in Luanshya, Zambia, during a time of personal and familial transition. When my parents separated at a young age, I began a life marked by movement—both physical and emotional. I first lived with my grandmother, who offered me her <strong>warmth</strong> and <strong>strength</strong>. Over the years, I moved between various relatives: from Kitwe to Lusaka, then back to Luanshya each place offering new challenges, new beginnings, and <strong>second chances</strong> to find stability.</p>
-      
-      <br>
-
-      <p>Though life often felt unpredictable, I learned to embrace each new environment. <strong>Change became my constant companion</strong>, and <strong>adaptability became a necessity</strong>. My early school years saw similar shifts. I began in a private school in Kitwe, only to transfer to a public school in Nkana East. After my aunt's husband passed away, I moved back and forth between families. But through it all, I remained <strong>resilient</strong>.</p>
-
-      <br>
-
-      <p>Each move was a <strong>breath</strong> a new chance to learn, grow, and hold on to the hope that things would get better.</p>
-
-      <br>
-
-      <p><strong>Chapter 2: Education as Escape and Empowerment</strong></p>
-      <p><strong>Education became my anchor</strong>. At Nkana Basic School in Kitwe, from Grade 5 to Grade 7, I poured my energy into academics and graduated with <strong>high marks</strong>. It was the first time I felt that my hard work could truly open doors for me. I continued my journey at Malela Secondary School, where I sat for my Grade 12 exams in 2018—and passed with <strong>excellence</strong>.</p>
-
-      <br>
-
-      <p>School was more than a place of learning. It was where I began to imagine a future beyond struggle. Every lesson, every exam, every long walk to class was a <strong>breath</strong> a <strong>second chance</strong> to rewrite my future.</p>
-
-      <br>
-
-      <p><strong>Chapter 3: Stepping Into the World</strong></p>
-      <p>In 2019, I took my first steps into the professional world as a teacher at a private school. For two years, I taught students not just what was in their textbooks, but what I was learning myself—that you could come from little and still <strong>dream big</strong>. I learned how to <strong>communicate</strong>, <strong>lead</strong>, and <strong>inspire</strong>—skills that would shape the rest of my life.</p>
-
-      <br>
-
-      <p>Then in 2021, I interned at Power Tools Logistics as an <strong>auditor</strong>. It was my first true exposure to the corporate world. I was now wearing formal shoes, sitting in boardrooms, handling data, and solving real business problems. It felt like I had walked through a door I once thought was closed to me.</p>
-
-      <br>
-
-      <p>Every experience was a new <strong>breath</strong>. A <strong>second chance</strong> to discover who I could be.</p>
-
-      <br>
-
-      <p><strong>Chapter 4: The Tech Path and a Turning Point</strong></p>
-      <p>My love for <strong>technology</strong> had always been simmering beneath the surface. In 2022, I followed that passion to <strong>Northern Technical College (NORTEC)</strong> in Ndola, enrolling in a Diploma in Computer Systems Engineering. I poured everything into my studies, earning recognition as the <strong>best student</strong> year after year. For the first time, I didn’t just feel like I belonged I felt like I was <strong>thriving</strong>.</p>
-
-      <br>
-
-      <p>But life reminded me that growth often walks hand in hand with <strong>grief</strong>. Just before graduation in September 2023, I <strong>lost my father</strong>. The pain was overwhelming, and for a moment, it felt like time stood still. But in the silence that followed, I remembered that each breath was still mine to take—and that meant I had another chance to carry on, in his honor.</p>
-
-      <br>
-
-      <p>His passing didn’t end my journey. It <strong>sharpened my purpose</strong>.</p>
-
-      <br>
-
-      <p><strong>Chapter 5: Building a Future from the Ground Up</strong></p>
-      <p>In mid-2024, I joined <strong>Zamlift</strong> as an IT Technician, working hands-on with systems, networks, and digital infrastructure. It felt like everything I had learned was finally being put to use.</p>
-
-      <br>
-
-      <p>But my ambitions didn’t stop there. I launched <strong>BUFFER ZONE</strong>, a graphic design and tech company I ran as a side hustle. It was a passion project born out of <strong>creativity</strong>, <strong>curiosity</strong>, and a desire to <strong>empower small businesses</strong> with digital tools.</p>
-
-      <br>
-
-      <p>In early 2025, I took an even bigger leap by founding <strong>Zatralo Zambia</strong>, an online platform that allows Zambians to easily purchase bus tickets. It was a solution to a problem I had seen firsthand—a digital bridge connecting people with the <strong>freedom to travel</strong>, plan, and explore.</p>
-
-      <br>
-
-      <p>These businesses were more than ventures. They were my <strong>breath</strong> my <strong>second chance</strong> to shape Zambia’s future with <strong>innovation</strong>.</p>
-
-      <br>
-
-      <p><strong>Chapter 6: Looking Forward</strong></p>
-      <p>I believe in the power of <strong>resilience</strong>, the magic of <strong>ideas</strong>, and the necessity of taking <strong>risks</strong>. My goal is not just to succeed for myself, but to leave behind systems, platforms, and tools that empower others.</p>
-
-      <br>
-
-      <p>From the child who moved from house to house, to the entrepreneur building digital platforms I am a testament to what happens when you <strong>don’t give up</strong>. When you see each moment not as an ending, but as an invitation to <strong>begin again</strong>.</p>
-
-      <br>
-
-      <p><strong>Final Words</strong></p>
-      <p>Every struggle I’ve faced, every loss I’ve endured, and every success I’ve celebrated has reminded me of one thing:</p>
-      <p><strong>Every breath is a second chance.</strong><br>
-      A <strong>second chance</strong> to learn.<br>
-      A <strong>second chance</strong> to grow.<br>
-      A <strong>second chance</strong> to build the life you believe in.</p>
-
-      <br>
-
-      <p><em>“Start small, remain focused, and always be ready to grow.”<br>Jubel Mobela</em></p>
-   <button class="read-more" onclick="expandBio()">
-        <i class="fas fa-chevron-up"></i> Read Less
-      </button>
-    </div>
-  </div>
-</section>
-
-
-<!-- Add this footer above the modals -->
-<footer class="main-footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <h4>Quick Links</h4>
-            <a href="#home">Home</a>
-            <a href="#contact">Contact</a>
-            <a href="jubel_mobela_cv.pdf" download>Download CV</a>
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-info">
+            <a href="mailto:jubelmobz19@gmail.com" class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-details">
+                    <h4>Email</h4>
+                    <p>jubelmobz19@gmail.com</p>
+                </div>
+            </a>
+            
+            <a href="https://wa.me/260768658484" class="contact-item" target="_blank">
+                <div class="contact-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="contact-details">
+                    <h4>WhatsApp</h4>
+                    <p>+260 768 658 484</p>
+                </div>
+            </a>
+            
+            <a href="https://www.facebook.com/mcjubeldrake.mobela" class="contact-item" target="_blank">
+                <div class="contact-icon">
+                    <i class="fab fa-facebook"></i>
+                </div>
+                <div class="contact-details">
+                    <h4>Facebook</h4>
+                    <p>Jubel Mobela</p>
+                </div>
+            </a>
+            
+            <a href="https://www.linkedin.com/in/yourusername" class="contact-item" target="_blank">
+                <div class="contact-icon">
+                    <i class="fab fa-linkedin"></i>
+                </div>
+                <div class="contact-details">
+                    <h4>LinkedIn</h4>
+                    <p>Jubel Mobela</p>
+                </div>
+            </a>
         </div>
         
-        <div class="footer-section">
-            <h4>Connect With Me</h4>
-            <div class="footer-socials">
-                <a href="https://www.facebook.com/mcjubeldrake.mobela" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://wa.me/260768658484" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/yourusername" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="mailto:jubelmobz19@gmail.com"><i class="fas fa-envelope"></i></a>
+        <button class="tour-btn" onclick="showModal()" style="width: 100%;"><i class="fas fa-paper-plane"></i> Send Message</button>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#home" class="nav-item active" data-section="home">
+            <i class="fas fa-home nav-icon"></i>
+            <span>Home</span>
+        </a>
+        <a href="#companies" class="nav-item" data-section="companies">
+            <i class="fas fa-building nav-icon"></i>
+            <span>Companies</span>
+        </a>
+        <a href="#education" class="nav-item" data-section="education">
+            <i class="fas fa-graduation-cap nav-icon"></i>
+            <span>Education</span>
+        </a>
+        <a href="#experience" class="nav-item" data-section="experience">
+            <i class="fas fa-briefcase nav-icon"></i>
+            <span>Experience</span>
+        </a>
+        <a href="#contact" class="nav-item" data-section="contact">
+            <i class="fas fa-envelope nav-icon"></i>
+            <span>Contact</span>
+        </a>
+    </div>
+
+    <!-- Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Let's Connect!</h3>
+            <p>Reach out through socials or send a direct message:</p>
+            
+            <div class="modal-socials">
+                <a href="https://www.facebook.com/mcjubeldrake.mobela" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://wa.me/260768658484" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/yourusername" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="mailto:jubelmobz19@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-        </div>
-        
-        <div class="footer-section">
-            <h4>Legal</h4>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Service</a>
-            <a>© 2025 Jubel Mobela</a>
+
+            <form class="modal-form" onsubmit="handleSubmit(event)">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit" class="tour-btn">Send Message</button>
+            </form>
         </div>
     </div>
-    
-    <button class="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
-</footer>
-<!-- Modal HTML -->
-<div id="contactModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h3>Let's Connect!</h3>
-        <p>Reach out through socials or send a direct message:</p>
-        
-        <div class="modal-socials">
-            <a href="https://www.facebook.com/mcjubeldrake.mobela" target="_blank" title="Facebook">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://wa.me/260768658484" target="_blank" title="WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="https://www.instagram.com/yourusername" target="_blank" title="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="mailto:jubelmobz19@gmail.com" title="Email">
-                <i class="fas fa-envelope"></i>
-            </a>
-        </div>
 
-        <form class="modal-form" onsubmit="handleSubmit(event)">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea rows="4" placeholder="Your Message" required></textarea>
-            <button type="submit" class="tour-btn">Send Message</button>
-        </form>
-    </div>
-</div>
+    <script>
+        // Enhanced JavaScript for complete functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation functionality
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('section');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Update active nav item
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    const sectionId = this.getAttribute('data-section');
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === sectionId) {
+                            section.classList.add('active');
+                        }
+                    });
+                    
+                    // Scroll to top of page
+                    window.scrollTo(0, 0);
+                });
+            });
 
+            // Enhanced scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-    <script src="script.js"></script>
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Animate language progress bars when they come into view
+                        if (entry.target.classList.contains('language-item')) {
+                            const progressFill = entry.target.querySelector('.progress-fill');
+                            const percent = entry.target.getAttribute('data-percent');
+                            if (progressFill) {
+                                progressFill.style.width = percent + '%';
+                            }
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animatable elements
+            const animatableElements = [
+                '.company-card',
+                '.education-item', 
+                '.timeline-item',
+                '.skill-category',
+                '.language-item',
+                '.hobby-item',
+                'section'
+            ];
+
+            animatableElements.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => {
+                    observer.observe(el);
+                });
+            });
+
+            // Enhanced modal functionality
+            const modal = document.getElementById('contactModal');
+            
+            window.showModal = function() {
+                if (modal) {
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+
+            window.closeModal = function() {
+                if (modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            };
+
+            // Close modal with escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.style.display === 'flex') {
+                    closeModal();
+                }
+            });
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Initialize language progress bars
+            document.querySelectorAll('.language-item').forEach(item => {
+                const percent = item.getAttribute('data-percent');
+                const fill = item.querySelector('.progress-fill');
+                if (fill) {
+                    // Don't animate immediately, wait for intersection observer
+                    fill.style.width = '0%';
+                }
+            });
+        });
+
+        // Biography expansion function
+        function expandBio() {
+            const bioContent = document.getElementById('bioContent');
+            const readMoreButton = document.querySelector('.read-more');
+            
+            if (bioContent.classList.contains('expanded')) {
+                bioContent.classList.remove('expanded');
+                readMoreButton.innerHTML = '<i class="fas fa-book-open"></i> Read More About My Journey';
+            } else {
+                bioContent.classList.add('expanded');
+                readMoreButton.innerHTML = '<i class="fas fa-chevron-up"></i> Read Less';
+            }
+        }
+
+        // Form submission handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            closeModal();
+            event.target.reset();
+        }
+    </script>
 </body>
 </html>
