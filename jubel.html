@@ -65,8 +65,7 @@
             display: none; /* Hidden on mobile, shown via bottom nav */
         }
 
-        /* Bottom Navigation - IMPROVED STYLING */
-       /* Bottom Navigation - FIXED FOR ALL SECTIONS */
+        /* Bottom Navigation - FIXED FOR ALL SECTIONS */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -238,6 +237,40 @@
             background: transparent;
             border: 1px solid var(--primary-blue);
             color: var(--primary-blue);
+        }
+
+        /* Company Logos Section */
+        .company-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .company-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .company-logo img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .company-logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .company-logo span {
+            font-size: 0.8rem;
+            color: var(--text-light);
         }
 
         /* Sections - FIXED POSITIONING */
@@ -821,6 +854,22 @@
                     <strong>system administration</strong>, and <strong>network management</strong>.
                 </p>
                 
+                <!-- Company Logos Section -->
+                <div class="company-logos">
+                    <div class="company-logo">
+                        <img src="BZ.png" alt="Buffer Zone Logo">
+                        <span>BUFFER ZONE</span>
+                    </div>
+                    <div class="company-logo">
+                        <img src="ZT.png" alt="Zatralo Logo">
+                        <span>ZATRALO</span>
+                    </div>
+                    <div class="company-logo">
+                        <img src="MH.png" alt="Mirror House Logo">
+                        <span>Mirror House</span>
+                    </div>
+                </div>
+                
                 <div class="action-buttons">
                     <a href="jubel_mobela_cv.pdf" download="Jubel_Mobela_CV.pdf" class="tour-btn"><i class="fas fa-download"></i> Download CV</a>
                     <button class="tour-btn outline" onclick="showModal()"><i class="fas fa-briefcase"></i> Hire Me</button>
@@ -1024,7 +1073,7 @@
             </div>
         </section>
 
-        <!-- Hobbies Section -->
+        <!-- Hobbies Section - UPDATED WITH 9 ADDITIONAL HOBBIES -->
         <section id="hobbies">
             <h2 class="section-title">Hobbies</h2>
             <div class="hobbies-grid">
@@ -1057,6 +1106,52 @@
                     <i class="fas fa-music"></i>
                     <h4>Music</h4>
                     <p>Focus-enhancing playlists</p>
+                </div>
+                <!-- Additional 9 hobbies -->
+                <div class="hobby-item">
+                    <i class="fas fa-film"></i>
+                    <h4>Movies</h4>
+                    <p>Documentaries & sci-fi films</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-futbol"></i>
+                    <h4>Football</h4>
+                    <p>Playing & watching matches</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-theater-masks"></i>
+                    <h4>Comedy</h4>
+                    <p>Stand-up & improv shows</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-utensils"></i>
+                    <h4>Cooking</h4>
+                    <p>Trying new recipes</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-hiking"></i>
+                    <h4>Hiking</h4>
+                    <p>Exploring nature trails</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-gamepad"></i>
+                    <h4>Gaming</h4>
+                    <p>Strategy & puzzle games</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-camera"></i>
+                    <h4>Photography</h4>
+                    <p>Landscape & urban shots</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-chess"></i>
+                    <h4>Chess</h4>
+                    <p>Strategic thinking games</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-plane"></i>
+                    <h4>Travel</h4>
+                    <p>Exploring new cultures</p>
                 </div>
             </div>
         </section>
@@ -1390,4 +1485,3 @@
     </script>
 </body>
 </html>
-
