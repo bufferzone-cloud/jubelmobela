@@ -35,7 +35,7 @@
             color: var(--text-dark);
             background-color: var(--light-bg);
             overflow-x: hidden;
-            padding-bottom: 60px; /* Space for bottom nav */
+            padding-bottom: 70px; /* Increased space for bottom nav */
         }
 
         /* App-like Navigation */
@@ -65,7 +65,7 @@
             display: none; /* Hidden on mobile, shown via bottom nav */
         }
 
-        /* Bottom Navigation */
+        /* Bottom Navigation - IMPROVED STYLING */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -74,8 +74,9 @@
             display: flex;
             justify-content: space-around;
             padding: 0.8rem 0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+            border-top: 1px solid var(--border-color);
         }
 
         .nav-item {
@@ -85,19 +86,30 @@
             text-decoration: none;
             color: var(--text-light);
             font-size: 0.7rem;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            padding: 0.3rem 0.5rem;
+            border-radius: 10px;
         }
 
         .nav-item.active {
             color: var(--primary-blue);
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-5px);
         }
 
         .nav-icon {
             font-size: 1.2rem;
             margin-bottom: 0.3rem;
+            transition: all 0.3s ease;
         }
 
-        /* Home Section - IMPROVED CENTERING */
+        .nav-item.active .nav-icon {
+            font-size: 1.5rem; /* Bigger icon for active section */
+            color: var(--primary-blue);
+            transform: scale(1.2);
+        }
+
+        /* Home Section - LARGER PROFILE PICTURE */
         #home {
             padding: 4rem 1rem 1rem;
             min-height: 100vh;
@@ -117,13 +129,18 @@
         }
 
         .profile-img-container {
-            width: 140px;
-            height: 140px;
+            width: 180px; /* Increased from 140px */
+            height: 180px; /* Increased from 140px */
             margin: 0 auto;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid var(--primary-blue);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+            border: 4px solid var(--primary-blue);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img-container:hover {
+            transform: scale(1.05);
         }
 
         .profile-img-container img {
@@ -214,13 +231,24 @@
             color: var(--primary-blue);
         }
 
-        /* Sections */
+        /* Sections - FIXED POSITIONING */
+        .sections-container {
+            position: relative;
+            min-height: calc(100vh - 130px);
+        }
+
         section {
             padding: 2rem 1rem;
             display: none;
             opacity: 0;
             transform: translateX(20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: calc(100vh - 130px);
+            overflow-y: auto;
         }
 
         section.active {
@@ -493,7 +521,7 @@
             color: var(--text-light);
         }
 
-        /* Autobiography */
+        /* Autobiography - IMPROVED READ MORE BUTTON */
         .bio-content {
             max-height: 300px;
             overflow: hidden;
@@ -512,23 +540,31 @@
         }
 
         .read-more {
-            background: transparent;
-            color: var(--primary-blue);
-            border: 1px solid var(--primary-blue);
-            padding: 0.6rem 1rem;
-            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
             cursor: pointer;
             margin-top: 1rem;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
         }
 
         .read-more:hover {
-            background: var(--primary-blue);
-            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .read-more:active {
+            transform: translateY(-1px);
         }
 
         /* Contact */
@@ -688,6 +724,12 @@
             section {
                 max-width: 800px;
                 margin: 0 auto;
+                left: 50%;
+                transform: translateX(-50%) translateX(20px);
+            }
+            
+            section.active {
+                transform: translateX(-50%) translateX(0);
             }
             
             .skills-grid {
@@ -700,6 +742,11 @@
             
             .hobbies-grid {
                 grid-template-columns: repeat(6, 1fr);
+            }
+            
+            .profile-img-container {
+                width: 200px; /* Even larger on desktop */
+                height: 200px;
             }
         }
 
@@ -733,341 +780,344 @@
         </div>
     </nav>
 
-    <!-- Home Section - NOW BETTER CENTERED -->
-    <section id="home" class="active">
-        <div class="home-container">
-            <div class="profile-img-container">
-                <img src="zamlift.jpg" alt="Portrait of Jubel Mobela">
-            </div>
-            
-            <h1 class="hero-title">
-                Jubel Mobela<br>
-                <span>
-                    Founder & CEO of 
-                    <span class="blue">Buffer Zone</span>,
-                    <span class="blue">Zambia Transport Logistics</span>, &
-                    <span class="blue">Mirror House</span>
-                </span>
-            </h1>
-            
-            <div class="contact-options">
-                <a href="https://www.facebook.com/mcjubeldrake.mobela" class="social-icon" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/yourusername" class="social-icon" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/yourusername" class="social-icon" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://wa.me/260768658484" class="social-icon" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:jubelmobz19@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
-            </div>
-            
-            <p class="professional-tagline">
-                Results-driven <strong>Developer and IT Technician</strong> with expertise in <strong>troubleshooting</strong>,
-                <strong>system administration</strong>, and <strong>network management</strong>.
-            </p>
-            
-            <div class="action-buttons">
-                <a href="jubel_mobela_cv.pdf" download="Jubel_Mobela_CV.pdf" class="tour-btn"><i class="fas fa-download"></i> Download CV</a>
-                <button class="tour-btn outline" onclick="showModal()"><i class="fas fa-briefcase"></i> Hire Me</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Companies Section -->
-    <section id="companies">
-        <h2 class="section-title">Companies</h2>
-        <div class="companies-grid">
-            <div class="card company-card">
-                <div class="phone-frame">
-                    <img src="bufferzone.jpg" alt="Buffer Zone App Screenshot">
+    <!-- Sections Container -->
+    <div class="sections-container">
+        <!-- Home Section - NOW BETTER CENTERED -->
+        <section id="home" class="active">
+            <div class="home-container">
+                <div class="profile-img-container">
+                    <img src="zamlift.jpg" alt="Portrait of Jubel Mobela">
                 </div>
-                <h3>BUFFER ZONE</h3>
-                <p><strong>Creative Design & Web Development Studio</strong></p>
-                <div class="company-description">
-                    <p><strong>BUFFER ZONE</strong> is a <strong>graphic design</strong> and <strong>web development</strong> company based in Ndola and Luanshya, Zambia.</p>
+                
+                <h1 class="hero-title">
+                    Jubel Mobela<br>
+                    <span>
+                        Founder & CEO of 
+                        <span class="blue">BUFFER ZONE</span>,
+                        <span class="blue">ZATRALO</span>, &
+                        <span class="blue">Mirror House</span>
+                    </span>
+                </h1>
+                
+                <div class="contact-options">
+                    <a href="https://www.facebook.com/mcjubeldrake.mobela" class="social-icon" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/yourusername" class="social-icon" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/yourusername" class="social-icon" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://wa.me/260768658484" class="social-icon" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:jubelmobz19@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+                
+                <p class="professional-tagline">
+                    Results-driven <strong>IT Technician</strong> with expertise in <strong>troubleshooting</strong>,
+                    <strong>system administration</strong>, and <strong>network management</strong>.
+                </p>
+                
+                <div class="action-buttons">
+                    <a href="jubel_mobela_cv.pdf" download="Jubel_Mobela_CV.pdf" class="tour-btn"><i class="fas fa-download"></i> Download CV</a>
+                    <button class="tour-btn outline" onclick="showModal()"><i class="fas fa-briefcase"></i> Hire Me</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Companies Section -->
+        <section id="companies">
+            <h2 class="section-title">Companies</h2>
+            <div class="companies-grid">
+                <div class="card company-card">
+                    <div class="phone-frame">
+                        <img src="bufferzone.jpg" alt="Buffer Zone App Screenshot">
+                    </div>
+                    <h3>BUFFER ZONE</h3>
+                    <p><strong>Creative Design & Web Development Studio</strong></p>
+                    <div class="company-description">
+                        <p><strong>BUFFER ZONE</strong> is a <strong>graphic design</strong> and <strong>web development</strong> company based in Ndola and Luanshya, Zambia.</p>
+                        <ul>
+                            <li><strong>50% down payment</strong> before project initiation</li>
+                            <li>Payments via <strong>MTN/Airtel Mobile Money</strong></li>
+                        </ul>
+                    </div>
+                    <a href="https://205.206.225.114/bufferzone/Home.html" class="tour-btn" target="_blank" style="display: block; text-align: center; margin-top: 1rem;">Visit Website</a>
+                </div>
+
+                <div class="card company-card">
+                    <div class="phone-frame">
+                        <img src="zatralo.jpg" alt="ZATRALO App Screenshot">
+                    </div>
+                    <h3>ZATRALO</h3>
+                    <p><strong>Transport-Tech Startup Platform</strong></p>
+                    <div class="company-description">
+                        <p><strong>ZATRALO</strong> (Zambia Transport Logistics) is a <strong>digital platform</strong> enabling <strong>convenient online bus ticket booking</strong>.</p>
+                        <ul>
+                            <li>Buy bus tickets <strong>any where around</strong> the country</li>
+                            <li>Pay with <strong>mobile money</strong></li>
+                            <li>Save, Print or share <strong>your DIGITAL TICKET</strong></li>
+                        </ul>
+                    </div>
+                    <a href="https://zatralo.com" class="tour-btn" target="_blank" style="display: block; text-align: center; margin-top: 1rem;">Visit Platform</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="education-timeline">
+                <div class="card education-item">
+                    <h3>Luso Private School</h3>
+                    <p>Grades 1 – 5</p>
+                    <p>Developed foundational literacy, numeracy, and problem-solving skills</p>
+                </div>
+                
+                <div class="card education-item">
+                    <h3>Nkana Basic School</h3>
+                    <p>Grades 5 – 7 (2013)</p>
+                    <p>Junior Secondary Certificate with focus on Mathematics, English, and Science</p>
+                </div>
+
+                <div class="card education-item">
+                    <h3>Malela Secondary School</h3>
+                    <p>Grade 12 Certificate (2018)</p>
+                    <p>Emphasis on science and technology subjects, demonstrated academic discipline</p>
+                </div>
+
+                <div class="card education-item">
+                    <h3>Northern Technical College (NORTEC)</h3>
+                    <p>Diploma in Computer Systems Engineering (2023)</p>
+                    <p>Awarded Best Student of 2023 for academic excellence and technical performance</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="card timeline-item">
+                    <h3>ZAMLIFT</h3>
+                    <h4>I.T Technician / Customer Care | 2024 – Present</h4>
                     <ul>
-                        <li><strong>50% down payment</strong> before project initiation</li>
-                        <li>Payments via <strong>MTN/Airtel Mobile Money</strong></li>
+                        <li>Manage organization's IT infrastructure (hardware, software, networks)</li>
+                        <li>Implement cybersecurity protocols and conduct system upgrades</li>
+                        <li>Provide frontline technical support and customer care solutions</li>
                     </ul>
                 </div>
-                <a href="https://205.206.225.114/bufferzone/Home.html" class="tour-btn" target="_blank" style="display: block; text-align: center; margin-top: 1rem;">Visit Website</a>
-            </div>
 
-            <div class="card company-card">
-                <div class="phone-frame">
-                    <img src="zatralo.jpg" alt="ZATRALO App Screenshot">
-                </div>
-                <h3>ZATRALO</h3>
-                <p><strong>Transport-Tech Startup Platform</strong></p>
-                <div class="company-description">
-                    <p><strong>ZATRALO</strong> (Zambia Transport Logistics) is a <strong>digital platform</strong> enabling <strong>convenient online bus ticket booking</strong>.</p>
+                <div class="card timeline-item">
+                    <h3>BEM MOTORS</h3>
+                    <h4>Auditor / I.T Technician Assistant | 2020 – 2021</h4>
                     <ul>
-                        <li>Buy bus tickets <strong>any where around</strong> the country</li>
-                        <li>Pay with <strong>mobile money</strong></li>
-                        <li>Save, Print or share <strong>your DIGITAL TICKET</strong></li>
+                        <li>Supported financial audits and compliance assessments</li>
+                        <li>Provided IT support including system troubleshooting</li>
+                        <li>Developed secure data management systems</li>
                     </ul>
                 </div>
-                <a href="https://zatralo.com" class="tour-btn" target="_blank" style="display: block; text-align: center; margin-top: 1rem;">Visit Platform</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Education Section -->
-    <section id="education">
-        <h2 class="section-title">Education</h2>
-        <div class="education-timeline">
-            <div class="card education-item">
-                <h3>Luso Private School</h3>
-                <p>Grades 1 – 5</p>
-                <p>Developed foundational literacy, numeracy, and problem-solving skills</p>
+                <div class="card timeline-item">
+                    <h3>LUSO PRIVATE SCHOOL</h3>
+                    <h4>Teacher / I.T Technician | 2019 – 2020</h4>
+                    <ul>
+                        <li>Taught ICT and computer literacy to 200+ students</li>
+                        <li>Maintained school IT infrastructure and equipment</li>
+                        <li>Provided technical support to staff and students</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="card skill-category">
+                    <h3>Technical Expertise</h3>
+                    <div class="skill-item">
+                        <h4>Network Administration</h4>
+                        <p>LAN/WAN setups, routers, switches, firewalls, network optimization</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Cybersecurity</h4>
+                        <p>Firewalls, antivirus, encryption, security audits</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Hardware Troubleshooting</h4>
+                        <p>Diagnostics, repairs, system assembly, upgrades</p>
+                    </div>
+                </div>
+
+                <div class="card skill-category">
+                    <h3>Development</h3>
+                    <div class="skill-item">
+                        <h4>Web Development</h4>
+                        <p>HTML, CSS, JavaScript, WordPress, React</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>Database Management</h4>
+                        <p>MySQL, PostgreSQL, data structuring, backups</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>API Integration</h4>
+                        <p>RESTful APIs, JSON/XML data handling</p>
+                    </div>
+                </div>
+
+                <div class="card skill-category">
+                    <h3>Design & Support</h3>
+                    <div class="skill-item">
+                        <h4>Graphic Design</h4>
+                        <p>Adobe Creative Suite, Photoshop, Illustrator</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>UI/UX Design</h4>
+                        <p>Wireframing, prototyping, user journey mapping</p>
+                    </div>
+                    <div class="skill-item">
+                        <h4>IT Support</h4>
+                        <p>Help desk operations, technical documentation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Languages Section -->
+        <section id="languages">
+            <h2 class="section-title">Languages</h2>
+            <div class="language-grid">
+                <div class="card language-item" data-percent="100">
+                    <i class="fas fa-flag-usa"></i>
+                    <h4>English</h4>
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                </div>
+                <div class="card language-item" data-percent="90">
+                    <i class="fas fa-comment-dots"></i>
+                    <h4>Bemba</h4>
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                </div>
+                <div class="card language-item" data-percent="40">
+                    <i class="fas fa-volume-down"></i>
+                    <h4>Nyanja</h4>
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                </div>
+                <div class="card language-item" data-percent="65">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Lamba</h4>
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                </div>
+                <div class="card language-item" data-percent="65">
+                    <i class="fas fa-comments"></i>
+                    <h4>French</h4>
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                </div>
+                <div class="card language-item" data-percent="65">
+                    <i class="fas fa-globe-europe"></i>
+                    <h4>Spanish</h4>
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hobbies Section -->
+        <section id="hobbies">
+            <h2 class="section-title">Hobbies</h2>
+            <div class="hobbies-grid">
+                <div class="hobby-item">
+                    <i class="fas fa-book"></i>
+                    <h4>Reading</h4>
+                    <p>Business strategy & tech innovation</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-pen-nib"></i>
+                    <h4>Writing</h4>
+                    <p>Technical documentation & blogs</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-pen-nib"></i>
+                    <h4>Poetry</h4>
+                    <p>Emotional expression and rhyming</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-running"></i>
+                    <h4>Running</h4>
+                    <p>Morning 5k routines</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-paint-brush"></i>
+                    <h4>Drawing</h4>
+                    <p>Digital art & concept design</p>
+                </div>
+                <div class="hobby-item">
+                    <i class="fas fa-music"></i>
+                    <h4>Music</h4>
+                    <p>Focus-enhancing playlists</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Autobiography Section -->
+        <section id="autobiography">
+            <h2 class="section-title">My Journey</h2>
+            <div class="card bio-content" id="bioContent">
+                <p><strong>Every Breath is a Second Chance: The Autobiography of Jubel Mobela</strong></p>
+
+                <p>My name is <strong>Jubel Mobela</strong>, and this is my story—a journey shaped by struggle, lifted by hope, and driven by the belief that <strong>every breath is a second chance</strong>. From humble beginnings in Luanshya, Zambia, to the foundation of growing tech enterprises, my life has never followed a straight path.</p>
+                
+                <p>I was born on <strong>July 21, 2002</strong>, in Luanshya, Zambia, during a time of personal and familial transition. When my parents separated at a young age, I began a life marked by movement—both physical and emotional. I first lived with my grandmother, who offered me her <strong>warmth</strong> and <strong>strength</strong>.</p>
+                
+                <button class="read-more" onclick="expandBio()">
+                    <i class="fas fa-book-open"></i> Read More About My Journey
+                </button>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-info">
+                <a href="mailto:jubelmobz19@gmail.com" class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p>jubelmobz19@gmail.com</p>
+                    </div>
+                </a>
+                
+                <a href="https://wa.me/260768658484" class="contact-item" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>WhatsApp</h4>
+                        <p>+260 768 658 484</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.facebook.com/mcjubeldrake.mobela" class="contact-item" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Facebook</h4>
+                        <p>Jubel Mobela</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/yourusername" class="contact-item" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>LinkedIn</h4>
+                        <p>Jubel Mobela</p>
+                    </div>
+                </a>
             </div>
             
-            <div class="card education-item">
-                <h3>Nkana Basic School</h3>
-                <p>Grades 5 – 7 (2013)</p>
-                <p>Junior Secondary Certificate with focus on Mathematics, English, and Science</p>
-            </div>
+            <button class="tour-btn" onclick="showModal()" style="width: 100%;"><i class="fas fa-paper-plane"></i> Send Message</button>
+        </section>
+    </div>
 
-            <div class="card education-item">
-                <h3>Malela Secondary School</h3>
-                <p>Grade 12 Certificate (2018)</p>
-                <p>Emphasis on science and technology subjects, demonstrated academic discipline</p>
-            </div>
-
-            <div class="card education-item">
-                <h3>Northern Technical College (NORTEC)</h3>
-                <p>Diploma in Computer Systems Engineering (2023)</p>
-                <p>Awarded Best Student of 2023 for academic excellence and technical performance</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience">
-        <h2 class="section-title">Professional Experience</h2>
-        <div class="timeline">
-            <div class="card timeline-item">
-                <h3>ZAMLIFT</h3>
-                <h4>I.T Technician / Customer Care | 2024 – Present</h4>
-                <ul>
-                    <li>Manage organization's IT infrastructure (hardware, software, networks)</li>
-                    <li>Implement cybersecurity protocols and conduct system upgrades</li>
-                    <li>Provide frontline technical support and customer care solutions</li>
-                </ul>
-            </div>
-
-            <div class="card timeline-item">
-                <h3>BEM MOTORS</h3>
-                <h4>Auditor / I.T Technician Assistant | 2020 – 2021</h4>
-                <ul>
-                    <li>Supported financial audits and compliance assessments</li>
-                    <li>Provided IT support including system troubleshooting</li>
-                    <li>Developed secure data management systems</li>
-                </ul>
-            </div>
-
-            <div class="card timeline-item">
-                <h3>LUSO PRIVATE SCHOOL</h3>
-                <h4>Teacher / I.T Technician | 2019 – 2020</h4>
-                <ul>
-                    <li>Taught ICT and computer literacy to 200+ students</li>
-                    <li>Maintained school IT infrastructure and equipment</li>
-                    <li>Provided technical support to staff and students</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="card skill-category">
-                <h3>Technical Expertise</h3>
-                <div class="skill-item">
-                    <h4>Network Administration</h4>
-                    <p>LAN/WAN setups, routers, switches, firewalls, network optimization</p>
-                </div>
-                <div class="skill-item">
-                    <h4>Cybersecurity</h4>
-                    <p>Firewalls, antivirus, encryption, security audits</p>
-                </div>
-                <div class="skill-item">
-                    <h4>Hardware Troubleshooting</h4>
-                    <p>Diagnostics, repairs, system assembly, upgrades</p>
-                </div>
-            </div>
-
-            <div class="card skill-category">
-                <h3>Development</h3>
-                <div class="skill-item">
-                    <h4>Web Development</h4>
-                    <p>HTML, CSS, JavaScript, WordPress, React</p>
-                </div>
-                <div class="skill-item">
-                    <h4>Database Management</h4>
-                    <p>MySQL, PostgreSQL, data structuring, backups</p>
-                </div>
-                <div class="skill-item">
-                    <h4>API Integration</h4>
-                    <p>RESTful APIs, JSON/XML data handling</p>
-                </div>
-            </div>
-
-            <div class="card skill-category">
-                <h3>Design & Support</h3>
-                <div class="skill-item">
-                    <h4>Graphic Design</h4>
-                    <p>Adobe Creative Suite, Photoshop, Illustrator</p>
-                </div>
-                <div class="skill-item">
-                    <h4>UI/UX Design</h4>
-                    <p>Wireframing, prototyping, user journey mapping</p>
-                </div>
-                <div class="skill-item">
-                    <h4>IT Support</h4>
-                    <p>Help desk operations, technical documentation</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Languages Section -->
-    <section id="languages">
-        <h2 class="section-title">Languages</h2>
-        <div class="language-grid">
-            <div class="card language-item" data-percent="100">
-                <i class="fas fa-flag-usa"></i>
-                <h4>English</h4>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-            </div>
-            <div class="card language-item" data-percent="90">
-                <i class="fas fa-comment-dots"></i>
-                <h4>Bemba</h4>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-            </div>
-            <div class="card language-item" data-percent="40">
-                <i class="fas fa-volume-down"></i>
-                <h4>Nyanja</h4>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-            </div>
-            <div class="card language-item" data-percent="65">
-                <i class="fas fa-handshake"></i>
-                <h4>Lamba</h4>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-            </div>
-            <div class="card language-item" data-percent="65">
-                <i class="fas fa-comments"></i>
-                <h4>French</h4>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-            </div>
-            <div class="card language-item" data-percent="65">
-                <i class="fas fa-globe-europe"></i>
-                <h4>Spanish</h4>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Hobbies Section -->
-    <section id="hobbies">
-        <h2 class="section-title">Hobbies</h2>
-        <div class="hobbies-grid">
-            <div class="hobby-item">
-                <i class="fas fa-book"></i>
-                <h4>Reading</h4>
-                <p>Business strategy & tech innovation</p>
-            </div>
-            <div class="hobby-item">
-                <i class="fas fa-pen-nib"></i>
-                <h4>Writing</h4>
-                <p>Technical documentation & blogs</p>
-            </div>
-            <div class="hobby-item">
-                <i class="fas fa-pen-nib"></i>
-                <h4>Poetry</h4>
-                <p>Emotional expression and rhyming</p>
-            </div>
-            <div class="hobby-item">
-                <i class="fas fa-running"></i>
-                <h4>Running</h4>
-                <p>Morning 5k routines</p>
-            </div>
-            <div class="hobby-item">
-                <i class="fas fa-paint-brush"></i>
-                <h4>Drawing</h4>
-                <p>Digital art & concept design</p>
-            </div>
-            <div class="hobby-item">
-                <i class="fas fa-music"></i>
-                <h4>Music</h4>
-                <p>Focus-enhancing playlists</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Autobiography Section -->
-    <section id="autobiography">
-        <h2 class="section-title">My Journey</h2>
-        <div class="card bio-content" id="bioContent">
-            <p><strong>Every Breath is a Second Chance: The Autobiography of Jubel Mobela</strong></p>
-
-            <p>My name is <strong>Jubel Mobela</strong>, and this is my story—a journey shaped by struggle, lifted by hope, and driven by the belief that <strong>every breath is a second chance</strong>. From humble beginnings in Luanshya, Zambia, to the foundation of growing tech enterprises, my life has never followed a straight path.</p>
-            
-            <p>I was born on <strong>July 21, 2002</strong>, in Luanshya, Zambia, during a time of personal and familial transition. When my parents separated at a young age, I began a life marked by movement—both physical and emotional. I first lived with my grandmother, who offered me her <strong>warmth</strong> and <strong>strength</strong>.</p>
-            
-            <button class="read-more" onclick="expandBio()">
-                <i class="fas fa-book-open"></i> Read More About My Journey
-            </button>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2 class="section-title">Contact Me</h2>
-        <div class="contact-info">
-            <a href="mailto:jubelmobz19@gmail.com" class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div class="contact-details">
-                    <h4>Email</h4>
-                    <p>jubelmobz19@gmail.com</p>
-                </div>
-            </a>
-            
-            <a href="https://wa.me/260768658484" class="contact-item" target="_blank">
-                <div class="contact-icon">
-                    <i class="fab fa-whatsapp"></i>
-                </div>
-                <div class="contact-details">
-                    <h4>WhatsApp</h4>
-                    <p>+260 768 658 484</p>
-                </div>
-            </a>
-            
-            <a href="https://www.facebook.com/mcjubeldrake.mobela" class="contact-item" target="_blank">
-                <div class="contact-icon">
-                    <i class="fab fa-facebook"></i>
-                </div>
-                <div class="contact-details">
-                    <h4>Facebook</h4>
-                    <p>Jubel Mobela</p>
-                </div>
-            </a>
-            
-            <a href="https://www.linkedin.com/in/yourusername" class="contact-item" target="_blank">
-                <div class="contact-icon">
-                    <i class="fab fa-linkedin"></i>
-                </div>
-                <div class="contact-details">
-                    <h4>LinkedIn</h4>
-                    <p>Jubel Mobela</p>
-                </div>
-            </a>
-        </div>
-        
-        <button class="tour-btn" onclick="showModal()" style="width: 100%;"><i class="fas fa-paper-plane"></i> Send Message</button>
-    </section>
-
-    <!-- Bottom Navigation -->
+    <!-- Bottom Navigation - IMPROVED STYLING -->
     <div class="bottom-nav">
         <a href="#home" class="nav-item active" data-section="home">
             <i class="fas fa-home nav-icon"></i>
@@ -1165,8 +1215,7 @@
                         }
                     });
                     
-                    // Scroll to top of page
-                    window.scrollTo(0, 0);
+                    // NO SCROLLING - sections are positioned absolutely
                 });
             });
 
