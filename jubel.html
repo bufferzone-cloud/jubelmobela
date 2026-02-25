@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Jubel Mobela · Tech Entrepreneur · augmented</title>
+    <title>Jubel Mobela · Tech Entrepreneur · refined</title>
     <!-- Font Awesome & Google Font -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
@@ -38,7 +38,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ---------- FIXED HEADER (with profile picture) ---------- */
+        /* ---------- FIXED HEADER ---------- */
         .top-bar {
             position: fixed;
             top: 0;
@@ -251,7 +251,7 @@
             box-shadow: none;
         }
 
-        /* ---------- HOME PAGE with background image (50% transparency) ---------- */
+        /* ---------- HOME PAGE with profile picture as background (50% transparency) ---------- */
         .home-container {
             display: flex;
             flex-direction: column;
@@ -263,13 +263,13 @@
         }
         #home {
             position: relative;
-            background-color: transparent; /* let pseudo show */
+            background-color: transparent;
         }
         #home::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-image: url('zamlift.jpg'); /* same as profile image */
             background-size: cover;
             background-position: center;
             opacity: 0.5;  /* 50% transparency */
@@ -289,18 +289,17 @@
             font-size: 1.6rem;
             font-weight: 700;
             text-align: center;
-            line-height: 1.3;
+            line-height: 1.4;
         }
         .hero-title span {
             font-size: 1rem;
             font-weight: 400;
             color: var(--text-muted);
-            display: block;
-            margin-top: 0.3rem;
+            display: inline;  /* keep inline */
         }
         .blue-highlight { color: var(--primary-indigo); font-weight: 600; }
 
-        /* attractive logo strip (restyled) */
+        /* attractive logo strip */
         .logo-strip {
             display: flex;
             flex-wrap: wrap;
@@ -388,12 +387,45 @@
         .lang-fill { height: 8px; border-radius: 20px; background: linear-gradient(90deg, var(--primary-indigo), var(--primary-purple)); width: 0%; transition: width 0.6s; }
         .lang-percent { font-weight: 600; color: var(--primary-indigo); width: 45px; }
 
-        /* ---------- AUTOBIOGRAPHY (FULL VERSION + extra paragraphs) ---------- */
-        .bio-text { max-height: 300px; overflow: hidden; transition: max-height 0.5s; }
+        /* ---------- AUTOBIOGRAPHY (improved color) ---------- */
+        .bio-card {
+            background: linear-gradient(145deg, #ffffff, #faf5ff);
+            border-left: 6px solid var(--primary-purple);
+            border-radius: 28px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-floating), 0 0 0 2px rgba(168, 85, 247, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        .bio-text { 
+            max-height: 300px; 
+            overflow: hidden; 
+            transition: max-height 0.5s; 
+        }
         .bio-text.expanded { max-height: 3000px; }
-        .read-more-btn { width: 100%; margin-top: 1.2rem; background: var(--card-white); border: 1px dashed var(--primary-indigo); color: var(--primary-indigo); }
+        .bio-text p {
+            margin-bottom: 1rem;
+        }
+        .bio-text strong {
+            color: var(--primary-indigo);
+            font-weight: 700;
+        }
+        .bio-text em {
+            color: var(--primary-purple);
+            font-style: italic;
+        }
+        .read-more-btn { 
+            width: 100%; 
+            margin-top: 1.2rem; 
+            background: white; 
+            border: 2px solid transparent;
+            border-image: linear-gradient(145deg, var(--primary-indigo), var(--primary-purple));
+            border-image-slice: 1;
+            color: var(--primary-indigo); 
+            font-weight: 700;
+            border-radius: 40px;
+        }
 
-        /* ---------- HOBBIES with search/filter functionality ---------- */
+        /* ---------- HOBBIES with search ---------- */
         .hobby-search {
             width: 100%;
             padding: 0.8rem 1.2rem;
@@ -482,13 +514,12 @@
 
     <!-- Sections container -->
     <div class="sections-container">
-        <!-- HOME (active by default) -->
+        <!-- HOME (active by default) with profile background -->
         <section id="home" class="active">
             <div class="home-container">
                 <img src="zamlift.jpg" alt="Jubel" class="profile-large" onerror="this.src='https://via.placeholder.com/150'">
                 <h1 class="hero-title">
-                    Jubel Mobela<br>
-                    <span>Founder & CEO of <span class="blue-highlight">BUFFER ZONE</span>, <span class="blue-highlight">ZATRALO</span>, <span class="blue-highlight">MIRROR HOUSE</span>, <span class="blue-highlight">ZYNAPSE</span> & <span class="blue-highlight">JUBEL</span></span>
+                    Jubel Mobela <span>Founder & CEO of <span class="blue-highlight">BUFFER ZONE</span>, <span class="blue-highlight">ZATRALO</span>, <span class="blue-highlight">MIRROR HOUSE</span>, <span class="blue-highlight">ZYNAPSE</span> & <span class="blue-highlight">JUBEL</span></span>
                 </h1>
                 <div class="social-row">
                     <a href="#" class="social-circle"><i class="fab fa-facebook"></i></a>
@@ -496,7 +527,7 @@
                     <a href="#" class="social-circle"><i class="fab fa-linkedin"></i></a>
                     <a href="#" class="social-circle"><i class="fab fa-whatsapp"></i></a>
                 </div>
-                <!-- company logos strip (restyled attractive) -->
+                <!-- company logos strip -->
                 <div class="logo-strip">
                     <div class="mini-logo"><img src="BZ.png" alt="BZ" onerror="this.src='https://via.placeholder.com/50'"><span>BUFFER ZONE</span></div>
                     <div class="mini-logo"><img src="ZT.png" alt="ZT" onerror="this.src='https://via.placeholder.com/50'"><span>ZATRALO</span></div>
@@ -518,21 +549,18 @@
         <section id="companies">
             <h2 class="section-title"><i class="fas fa-building"></i> My Companies</h2>
             <div class="companies-grid">
-                <!-- Buffer zone -->
                 <div class="ios-card company-card">
                     <div class="phone-mock"><img src="bufferzone.jpg" alt="Buffer Zone" onerror="this.src='https://via.placeholder.com/200x120'"></div>
                     <h3>BUFFER ZONE</h3>
                     <p class="company-desc"><strong>Creative design & web dev studio</strong> – 50% down payment, mobile money.</p>
                     <a href="#" class="btn-gradient" style="align-self: flex-start;">Visit platform</a>
                 </div>
-                <!-- Zatralo -->
                 <div class="ios-card company-card">
                     <div class="phone-mock"><img src="zatralo.jpg" alt="Zatralo" onerror="this.src='https://via.placeholder.com/200x120'"></div>
                     <h3>ZATRALO (Zambia Transport Logistics)</h3>
                     <p class="company-desc">Digital bus ticketing · mobile money · digital ticket.</p>
                     <a href="#" class="btn-gradient">Visit platform</a>
                 </div>
-                <!-- Zynapse -->
                 <div class="ios-card company-card">
                     <div class="phone-mock"><img src="zyn.png" alt="Zynapse" onerror="this.src='https://via.placeholder.com/200x120'"></div>
                     <h3>ZYNAPSE <span style="font-size: 0.8rem; background: #eef2ff; padding: 0.2rem 0.8rem; border-radius: 40px;">secure · chat · call</span></h3>
@@ -546,7 +574,6 @@
                     </div>
                     <a href="#" class="btn-gradient">Visit Zynapse</a>
                 </div>
-                <!-- Jubel -->
                 <div class="ios-card company-card">
                     <div class="phone-mock"><img src="jub.png" alt="Jubel" onerror="this.src='https://via.placeholder.com/200x120'"></div>
                     <h3>JUBEL <span style="font-size: 0.8rem; background: #eef2ff; padding: 0.2rem 0.8rem; border-radius: 40px;">ride · delivery · transport</span></h3>
@@ -642,10 +669,10 @@
             </div>
         </section>
 
-        <!-- AUTOBIOGRAPHY (FULL VERSION + more lines) -->
+        <!-- AUTOBIOGRAPHY (improved color) -->
         <section id="autobiography">
             <h2 class="section-title"><i class="fas fa-book"></i> My Journey</h2>
-            <div class="ios-card">
+            <div class="bio-card">
                 <div class="bio-text" id="bioText">
                     <p><strong>Every Breath is a Second Chance: The Autobiography of Jubel Mobela</strong></p>
                     <p>My name is <strong>Jubel Mobela</strong>, and this is my story—a journey shaped by struggle, lifted by hope, and driven by the belief that <strong>every breath is a second chance</strong>. From humble beginnings in Luanshya, Zambia, to the foundation of growing tech enterprises, my life has never followed a straight path.</p>
@@ -670,7 +697,7 @@
                     <p><strong>Chapter 5½: Two New Ventures – Zynapse & Jubel</strong><br>
                     Driven by the belief that technology can transform everyday life, I expanded my vision. I founded <strong>Zynapse</strong>, a next‑generation communication app built with privacy at its core. Zynapse offers end‑to‑end encrypted messaging, high‑definition video and audio calls, and secure file sharing — a protected space for conversations. Soon after, I launched <strong>Jubel</strong>, a comprehensive ride‑share and delivery platform. Jubel provides affordable rides (JubelGo, JubelXL), parcel and food delivery, real‑time tracking, and 24/7 support. Both companies reflect my commitment to solving real problems: safe communication and seamless transport. They are my latest <strong>second chances</strong> to make a difference.</p>
 
-                    <!-- Extra paragraphs to make it longer -->
+                    <!-- Extra paragraphs -->
                     <p><strong>Chapter 6: Overcoming Imposter Syndrome</strong><br>
                     Even as I built companies, I often felt like an outsider in boardrooms and tech meetups. I doubted whether a boy from Luanshya could compete on a global stage. But I learned that <strong>authenticity</strong> is a superpower. I leaned into my unique perspective, and that became the foundation of my leadership style. Today, I mentor young Zambian tech enthusiasts, sharing the message that your background does not determine your ceiling.</p>
 
@@ -793,7 +820,6 @@
             settingsPanel.classList.toggle('show');
         });
 
-        // Click outside to close panels
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.header-icons')) {
                 closeAllPanels();
