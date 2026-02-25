@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Jubel Mobela · Tech Entrepreneur · refined</title>
+    <title>Jubel Mobela · Tech Entrepreneur · refined dark home</title>
     <!-- Font Awesome & Google Font -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
@@ -251,7 +251,26 @@
             box-shadow: none;
         }
 
-        /* ---------- HOME PAGE with profile picture as background (50% transparency) ---------- */
+        /* ---------- HOME PAGE with dark overlay and white text ---------- */
+        #home {
+            position: relative;
+            background-image: url('zamlift.jpg');  /* same as profile image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        #home::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            opacity: 0.6;  /* black transparency */
+            pointer-events: none;
+            z-index: 1;
+        }
         .home-container {
             display: flex;
             flex-direction: column;
@@ -260,21 +279,27 @@
             margin: 0 auto;
             position: relative;
             z-index: 2;
+            color: white;  /* all text white inside home */
         }
-        #home {
-            position: relative;
-            background-color: transparent;
+        .home-container .hero-title,
+        .home-container .hero-title span,
+        .home-container .blue-highlight,
+        .home-container .professional-tagline,
+        .home-container .social-circle {
+            color: white;  /* override */
         }
-        #home::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('zamlift.jpg'); /* same as profile image */
-            background-size: cover;
-            background-position: center;
-            opacity: 0.5;  /* 50% transparency */
-            pointer-events: none;
-            z-index: 0;
+        .home-container .blue-highlight {
+            color: #cbd5e1;  /* light gray for highlights, still readable */
+            font-weight: 700;
+        }
+        .home-container .social-circle {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+        .home-container .btn-gradient-outline {
+            border-color: white;
+            color: white;
         }
         .profile-large {
             width: 150px;
@@ -282,7 +307,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid white;
-            box-shadow: 0 20px 30px -8px rgba(99,102,241,0.3);
+            box-shadow: 0 20px 30px -8px rgba(0,0,0,0.5);
             margin-bottom: 1rem;
         }
         .hero-title {
@@ -294,12 +319,15 @@
         .hero-title span {
             font-size: 1rem;
             font-weight: 400;
-            color: var(--text-muted);
             display: inline;  /* keep inline */
         }
-        .blue-highlight { color: var(--primary-indigo); font-weight: 600; }
+        .professional-tagline {
+            text-align: center;
+            opacity: 0.9;
+            margin: 1rem 0;
+        }
 
-        /* attractive logo strip */
+        /* attractive logo strip (adjusted for dark bg) */
         .logo-strip {
             display: flex;
             flex-wrap: wrap;
@@ -312,18 +340,17 @@
             flex-direction: column;
             align-items: center;
             width: 80px;
-            background: rgba(255,255,255,0.7);
+            background: rgba(0,0,0,0.4);
             backdrop-filter: blur(4px);
             padding: 0.8rem 0.3rem;
             border-radius: 28px;
-            box-shadow: 0 8px 16px -8px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.7);
+            box-shadow: 0 8px 16px -8px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
             transition: all 0.2s;
         }
         .mini-logo:hover {
             transform: scale(1.05);
-            background: white;
-            box-shadow: 0 15px 25px -10px var(--primary-indigo);
+            background: rgba(0,0,0,0.6);
         }
         .mini-logo img {
             width: 48px;
@@ -332,38 +359,16 @@
             border-radius: 16px;
             background: white;
             padding: 4px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         .mini-logo span {
             font-size: 0.7rem;
             font-weight: 700;
             margin-top: 0.4rem;
-            color: var(--text-dark);
-            background: linear-gradient(145deg, var(--primary-indigo), var(--primary-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
+            background: none;
+            -webkit-text-fill-color: white;
         }
-
-        .social-row {
-            display: flex;
-            gap: 1rem;
-            margin: 1.5rem 0 0.5rem;
-        }
-        .social-circle {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(145deg, white, #f1f5f9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-indigo);
-            font-size: 1.3rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(0,0,0,0.02);
-            transition: 0.2s;
-        }
-        .social-circle:hover { transform: translateY(-3px); }
 
         /* ---------- COMPANIES GRID ---------- */
         .companies-grid { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -374,10 +379,28 @@
         .company-desc li { margin-bottom: 0.4rem; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
         .company-desc i { color: var(--primary-indigo); width: 1.2rem; }
 
-        /* ---------- SKILLS 10 ITEMS ---------- */
-        .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-        .skill-pill { background: var(--card-white); border-radius: 40px; padding: 1rem 1rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); display: flex; align-items: center; gap: 0.8rem; font-weight: 500; }
-        .skill-pill i { font-size: 1.4rem; color: var(--primary-indigo); }
+        /* ---------- SKILLS & HOBBIES (unified style) ---------- */
+        .skills-grid, .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+        .skill-pill, .hobby-item {
+            background: var(--card-white);
+            border-radius: 40px;
+            padding: 1rem 1rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 500;
+        }
+        .skill-pill i, .hobby-item i {
+            font-size: 1.4rem;
+            color: var(--primary-indigo);
+        }
+        /* hobbies no longer have search */
 
         /* ---------- LANGUAGES ---------- */
         .lang-modern { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -387,7 +410,7 @@
         .lang-fill { height: 8px; border-radius: 20px; background: linear-gradient(90deg, var(--primary-indigo), var(--primary-purple)); width: 0%; transition: width 0.6s; }
         .lang-percent { font-weight: 600; color: var(--primary-indigo); width: 45px; }
 
-        /* ---------- AUTOBIOGRAPHY (improved color) ---------- */
+        /* ---------- AUTOBIOGRAPHY (full visible, no toggle, improved color) ---------- */
         .bio-card {
             background: linear-gradient(145deg, #ffffff, #faf5ff);
             border-left: 6px solid var(--primary-purple);
@@ -397,11 +420,9 @@
             margin-bottom: 1.5rem;
         }
         .bio-text { 
-            max-height: 300px; 
-            overflow: hidden; 
-            transition: max-height 0.5s; 
+            max-height: none;  /* full visible */
+            overflow: visible;
         }
-        .bio-text.expanded { max-height: 3000px; }
         .bio-text p {
             margin-bottom: 1rem;
         }
@@ -413,47 +434,10 @@
             color: var(--primary-purple);
             font-style: italic;
         }
-        .read-more-btn { 
-            width: 100%; 
-            margin-top: 1.2rem; 
-            background: white; 
-            border: 2px solid transparent;
-            border-image: linear-gradient(145deg, var(--primary-indigo), var(--primary-purple));
-            border-image-slice: 1;
-            color: var(--primary-indigo); 
-            font-weight: 700;
-            border-radius: 40px;
+        /* read more button hidden */
+        .read-more-btn {
+            display: none;
         }
-
-        /* ---------- HOBBIES with search ---------- */
-        .hobby-search {
-            width: 100%;
-            padding: 0.8rem 1.2rem;
-            border-radius: 40px;
-            border: 1px solid var(--border-light);
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-        }
-        .hobbies-grid {
-            display: grid;
-            grid-template-columns: repeat(3,1fr);
-            gap: 0.8rem;
-        }
-        .hobby-item {
-            background: var(--card-white);
-            border-radius: 40px;
-            padding: 1rem 0.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-        .hobby-item i { color: var(--primary-indigo); }
-        .hobby-item.hidden { display: none; }
 
         /* ---------- CONTACT GRID ---------- */
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -481,9 +465,10 @@
         }
 
         @media (min-width: 600px) {
-            .skills-grid { grid-template-columns: repeat(3,1fr); }
+            .skills-grid, .hobbies-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
             .contact-grid { grid-template-columns: repeat(4,1fr); }
-            .hobbies-grid { grid-template-columns: repeat(5,1fr); }
         }
     </style>
 </head>
@@ -514,7 +499,7 @@
 
     <!-- Sections container -->
     <div class="sections-container">
-        <!-- HOME (active by default) with profile background -->
+        <!-- HOME (active by default) with dark overlay and white text -->
         <section id="home" class="active">
             <div class="home-container">
                 <img src="zamlift.jpg" alt="Jubel" class="profile-large" onerror="this.src='https://via.placeholder.com/150'">
@@ -535,7 +520,7 @@
                     <div class="mini-logo"><img src="zynapse.png" alt="zynapse" onerror="this.src='https://via.placeholder.com/50'"><span>ZYNAPSE</span></div>
                     <div class="mini-logo"><img src="jubel.png" alt="jubel" onerror="this.src='https://via.placeholder.com/50'"><span>JUBEL</span></div>
                 </div>
-                <p class="professional-tagline" style="text-align: center; color: var(--text-muted); margin: 1rem 0;">
+                <p class="professional-tagline">
                     IT Technician · Developer · Serial entrepreneur
                 </p>
                 <div style="display: flex; gap: 1rem;">
@@ -646,11 +631,10 @@
             </div>
         </section>
 
-        <!-- HOBBIES (15 items with search) -->
+        <!-- HOBBIES (15 items, styled like skills, no search) -->
         <section id="hobbies">
             <h2 class="section-title"><i class="fas fa-heart"></i> Hobbies</h2>
-            <input type="text" class="hobby-search" id="hobbySearch" placeholder="Search hobbies...">
-            <div class="hobbies-grid" id="hobbiesGrid">
+            <div class="hobbies-grid">
                 <div class="hobby-item"><i class="fas fa-book"></i> Reading</div>
                 <div class="hobby-item"><i class="fas fa-pen-nib"></i> Writing</div>
                 <div class="hobby-item"><i class="fas fa-pen-nib"></i> Poetry</div>
@@ -669,7 +653,7 @@
             </div>
         </section>
 
-        <!-- AUTOBIOGRAPHY (improved color) -->
+        <!-- AUTOBIOGRAPHY (full, no toggle) -->
         <section id="autobiography">
             <h2 class="section-title"><i class="fas fa-book"></i> My Journey</h2>
             <div class="bio-card">
@@ -712,7 +696,7 @@
                     A <strong>second chance</strong> to build the life you believe in.</p>
                     <p><em>"Start small, remain focused, and always be ready to grow."<br>— Jubel Mobela</em></p>
                 </div>
-                <button class="btn-gradient read-more-btn" onclick="toggleBio()"><i class="fas fa-chevron-down"></i> Read full story</button>
+                <!-- button removed -->
             </div>
         </section>
 
@@ -779,18 +763,6 @@
             });
         });
 
-        // Autobiography expand/collapse
-        function toggleBio() {
-            const bio = document.getElementById('bioText');
-            bio.classList.toggle('expanded');
-            const btn = document.querySelector('.read-more-btn');
-            if (bio.classList.contains('expanded')) {
-                btn.innerHTML = '<i class="fas fa-chevron-up"></i> Read less';
-            } else {
-                btn.innerHTML = '<i class="fas fa-chevron-down"></i> Read full story';
-            }
-        }
-
         // Modal
         const modal = document.getElementById('contactModal');
         window.showModal = function() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
@@ -824,22 +796,6 @@
             if (!e.target.closest('.header-icons')) {
                 closeAllPanels();
             }
-        });
-
-        // Hobby search filter
-        const searchInput = document.getElementById('hobbySearch');
-        const hobbyItems = document.querySelectorAll('.hobby-item');
-
-        searchInput.addEventListener('input', function() {
-            const term = this.value.toLowerCase().trim();
-            hobbyItems.forEach(item => {
-                const text = item.innerText.toLowerCase();
-                if (text.includes(term)) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
         });
     </script>
 </body>
