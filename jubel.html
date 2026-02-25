@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jubel Mobela | Tech Entrepreneur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Jubel Mobela · Tech Entrepreneur</title>
+    <!-- Font Awesome & Google Font -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
     <style>
-        /* Base Styles */
+        /* ---------- RESET & VARIABLES (SCALED DOWN 25%) ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -15,71 +16,107 @@
         }
 
         :root {
-            --primary-blue: #6366f1;
-            --primary-purple: #8b5cf6;
-            --light-bg: #f8fafc;
-            --card-bg: #ffffff;
+            --primary-blue: #3b82f6;
+            --primary-indigo: #6366f1;
+            --primary-purple: #a855f7;
+            --soft-bg: #f9fafc;
+            --card-white: #ffffff;
             --text-dark: #1e293b;
-            --text-light: #64748b;
-            --border-color: #e2e8f0;
+            --text-muted: #64748b;
+            --border-light: #e9edf2;
+            --shadow-sm: 0 6px 15px rgba(0,0,0,0.02), 0 1.5px 4.5px rgba(0,0,0,0.03);
+            --shadow-floating: 0 11px 22px -9px rgba(0,0,0,0.1), 0 3px 9px rgba(0,0,0,0.02);
+            --glass-effect: rgba(255,255,255,0.8);
         }
 
         html {
-            scroll-behavior: smooth;
-            font-size: 14px;
+            font-size: 10.5px; /* 25% reduction from original 14px */
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.5;
+            background-color: var(--soft-bg);
             color: var(--text-dark);
-            background-color: var(--light-bg);
-            overflow-x: hidden;
-            padding-bottom: 70px; /* Increased space for bottom nav */
+            line-height: 1.5;
+            padding-bottom: 60px; /* reduced from 80px */
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* App-like Navigation */
-        .navbar {
+        /* ---------- FIXED HEADER (with profile picture) ---------- */
+        .top-bar {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            background: var(--card-bg);
-            padding: 0.8rem 1rem;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            height: 48px; /* was 64px *0.75 */
+            background: var(--card-white);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            background-color: rgba(255,255,255,0.85);
+            box-shadow: 0 1.5px 9px rgba(0,0,0,0.02);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            height: 60px;
+            justify-content: space-between;
+            padding: 0 0.9rem; /* reduced */
+            z-index: 1100;
+            border-bottom: 1px solid var(--border-light);
         }
 
-        .logo {
-            font-size: 1.2rem;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem; /* 0.6*0.75 */
+        }
+
+        .mini-profile {
+            width: 28px; /* 38*0.75 */
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid white;
+            box-shadow: 0 3px 6px rgba(99,102,241,0.15);
+        }
+
+        .logo-text {
             font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            font-size: 0.9rem; /* 1.2*0.75 */
+            background: linear-gradient(145deg, var(--primary-indigo), var(--primary-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .nav-links {
-            display: none; /* Hidden on mobile, shown via bottom nav */
+        .header-icons {
+            display: flex;
+            gap: 0.75rem; /* 1*0.75 */
+            color: var(--primary-indigo);
         }
 
-        /* Bottom Navigation - FIXED FOR ALL SECTIONS */
+        .header-icons i {
+            font-size: 1rem; /* 1.3*0.75 approx */
+            opacity: 0.8;
+        }
+
+        /* ---------- FIXED BOTTOM NAV (horizontal scroll, locked) ---------- */
         .bottom-nav {
             position: fixed;
             bottom: 0;
+            left: 0;
             width: 100%;
-            background: var(--card-bg);
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             display: flex;
-            justify-content: space-between;
-            padding: 0.8rem 0.5rem;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            border-top: 1px solid var(--border-color);
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0.375rem 0.75rem; /* 0.5/0.75 rem? */
+            gap: 0.15rem;
+            box-shadow: 0 -3px 15px rgba(0,0,0,0.02);
+            border-top: 1px solid var(--border-light);
+            z-index: 1100;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
         }
 
         .bottom-nav::-webkit-scrollbar {
@@ -87,210 +124,55 @@
         }
 
         .nav-item {
-            display: flex;
+            display: inline-flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-decoration: none;
-            color: var(--text-light);
-            font-size: 0.65rem;
-            transition: all 0.3s ease;
-            padding: 0.3rem 0.4rem;
-            border-radius: 10px;
-            min-width: 50px;
+            color: var(--text-muted);
+            font-size: 0.525rem; /* 0.7*0.75 */
+            font-weight: 500;
+            padding: 0.3rem 0.75rem; /* 0.4/1 *0.75 */
+            border-radius: 30px;
+            transition: all 0.2s cubic-bezier(0.2,0,0,1);
+            background: transparent;
             flex-shrink: 0;
+            min-width: 48px; /* 64*0.75 */
+        }
+
+        .nav-item i {
+            font-size: 0.9rem; /* 1.2*0.75 */
+            margin-bottom: 0.11rem;
         }
 
         .nav-item.active {
-            color: var(--primary-blue);
-            background: rgba(99, 102, 241, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .nav-icon {
-            font-size: 1.1rem;
-            margin-bottom: 0.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .nav-item.active .nav-icon {
-            font-size: 1.3rem;
-            color: var(--primary-blue);
-            transform: scale(1.2);
-        }
-        /* Home Section - LARGER PROFILE PICTURE */
-        #home {
-            padding: 4rem 1rem 1rem;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .home-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .profile-img-container {
-            width: 180px; /* Increased from 140px */
-            height: 180px; /* Increased from 140px */
-            margin: 0 auto;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid var(--primary-blue);
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .profile-img-container:hover {
-            transform: scale(1.05);
-        }
-
-        .profile-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-title span {
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: var(--text-light);
-        }
-
-        .blue {
-            color: var(--primary-blue);
+            background: rgba(99,102,241,0.12);
+            color: var(--primary-indigo);
             font-weight: 600;
+            transform: translateY(-1.5px);
         }
 
-        .contact-options {
-            display: flex;
-            justify-content: center;
-            gap: 0.8rem;
-            margin: 1rem 0;
+        .nav-item.active i {
+            color: var(--primary-indigo);
         }
 
-        .social-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-            color: white;
-            border-radius: 50%;
-            text-decoration: none;
-            transition: transform 0.3s;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-3px);
-        }
-
-        .professional-tagline {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-            color: var(--text-light);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 0.8rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .tour-btn {
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-            color: white;
-            border: none;
-            padding: 0.7rem 1.2rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tour-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-        }
-
-        .tour-btn.outline {
-            background: transparent;
-            border: 1px solid var(--primary-blue);
-            color: var(--primary-blue);
-        }
-
-        /* Company Logos Section */
-        .company-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-        }
-
-        .company-logo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .company-logo img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-            border-radius: 8px;
-            transition: transform 0.3s;
-        }
-
-        .company-logo img:hover {
-            transform: scale(1.1);
-        }
-
-        .company-logo span {
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-
-        /* Sections - FIXED POSITIONING */
+        /* ---------- SECTIONS CONTAINER ---------- */
         .sections-container {
             position: relative;
-            min-height: calc(100vh - 130px);
+            margin-top: 48px; /* matches top-bar height */
+            min-height: calc(100vh - 108px); /* adjusted */
         }
 
         section {
-            padding: 2rem 1rem;
+            padding: 1.5rem 0.9rem; /* 2/1.2 *0.75 */
             display: none;
             opacity: 0;
-            transform: translateX(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateX(15px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            min-height: calc(100vh - 130px);
-            overflow-y: auto;
         }
 
         section.active {
@@ -299,1190 +181,620 @@
             transform: translateX(0);
         }
 
+        /* ---------- TYPOGRAPHY & CARDS ---------- */
         .section-title {
-            font-size: 1.4rem;
+            font-size: 1.2rem; /* 1.6*0.75 */
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.35rem; /* 1.8*0.75 */
             color: var(--text-dark);
-            text-align: center;
-            position: relative;
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 3px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-            border-radius: 2px;
-        }
-
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.2rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-blue);
-        }
-
-        .card p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Companies Section */
-        .companies-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .company-card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .company-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary-blue), var(--primary-purple));
-        }
-
-        .phone-frame {
-            width: 100%;
-            max-width: 200px;
-            margin: 0 auto 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .phone-frame img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .company-description ul {
-            list-style: none;
-            padding-left: 0;
-            margin-top: 0.8rem;
-        }
-
-        .company-description li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.2rem;
-            font-size: 0.8rem;
-        }
-
-        .company-description li:before {
-            content: "•";
-            color: var(--primary-blue);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Education & Experience */
-        .education-timeline, .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .education-item, .timeline-item {
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .education-item:before, .timeline-item:before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.5rem;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--primary-blue);
-        }
-
-        .education-item:after, .timeline-item:after {
-            content: '';
-            position: absolute;
-            left: 3px;
-            top: 1.2rem;
-            width: 2px;
-            height: calc(100% - 0.5rem);
-            background: var(--border-color);
-        }
-
-        .education-item:last-child:after, .timeline-item:last-child:after {
-            display: none;
-        }
-
-        .timeline-item h4 {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            font-size: 0.85rem;
-        }
-
-        .timeline-item ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .timeline-item li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.2rem;
-            font-size: 0.8rem;
-        }
-
-        .timeline-item li:before {
-            content: "▸";
-            color: var(--primary-blue);
-            position: absolute;
-            left: 0;
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        .skill-category h3 {
-            font-size: 1rem;
-            margin-bottom: 0.8rem;
-            color: var(--primary-purple);
-        }
-
-        .skill-item {
-            margin-bottom: 0.8rem;
-        }
-
-        .skill-item h4 {
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-            color: var(--text-dark);
-        }
-
-        .skill-item p {
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-
-        /* Languages */
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .language-item {
-            text-align: center;
-            padding: 1rem 0.5rem;
-        }
-
-        .language-item i {
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 0.8rem;
-        }
-
-        .language-item h4 {
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: var(--border-color);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-            transition: width 1s ease-in-out;
-        }
-
-        /* Hobbies */
-        .hobbies-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
-        .hobby-item {
-            text-align: center;
-            padding: 1rem 0.5rem;
-            border-radius: 8px;
-            background: var(--card-bg);
-            transition: transform 0.3s;
-        }
-
-        .hobby-item:hover {
-            transform: translateY(-3px);
-        }
-
-        .hobby-item i {
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .hobby-item h4 {
-            font-size: 0.8rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .hobby-item p {
-            font-size: 0.7rem;
-            color: var(--text-light);
-        }
-
-        /* Autobiography - IMPROVED READ MORE BUTTON */
-        .bio-content {
-            max-height: 300px;
-            overflow: hidden;
-            position: relative;
-            transition: max-height 0.5s ease;
-        }
-
-        .bio-content.expanded {
-            max-height: 2000px;
-        }
-
-        .bio-content p {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-            font-size: 0.85rem;
-        }
-
-        .read-more {
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            width: 100%;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+            gap: 0.45rem;
+        }
+        .section-title i {
+            background: linear-gradient(145deg, var(--primary-indigo), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.35rem; /* 1.8*0.75 */
         }
 
-        .read-more:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
+        .ios-card {
+            background: var(--card-white);
+            border-radius: 21px; /* 28*0.75 */
+            padding: 1.125rem; /* 1.5*0.75 */
+            box-shadow: var(--shadow-floating);
+            border: 1px solid rgba(255,255,255,0.6);
+            backdrop-filter: blur(2px);
+            margin-bottom: 1.125rem;
+            transition: all 0.2s;
         }
 
-        .read-more:active {
-            transform: translateY(-1px);
-        }
-
-        /* Contact */
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.8rem;
-            background: var(--card-bg);
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-dark);
-            transition: transform 0.3s;
-        }
-
-        .contact-item:hover {
+        .ios-card:hover {
             transform: translateY(-2px);
+            box-shadow: 0 16px 30px -10px rgba(99,102,241,0.2);
         }
 
-        .contact-icon {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+        .btn-gradient {
+            background: linear-gradient(145deg, var(--primary-indigo), var(--primary-purple));
+            border: none;
             color: white;
-            border-radius: 50%;
-        }
-
-        .contact-details h4 {
-            font-size: 0.9rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .contact-details p {
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            margin: 1rem;
-            padding: 1.5rem;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 400px;
-            position: relative;
-        }
-
-        .close {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--text-light);
-        }
-
-        .modal h3 {
-            margin-bottom: 1rem;
-            text-align: center;
-            color: var(--primary-blue);
-        }
-
-        .modal-socials {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .modal-socials a {
+            padding: 0.525rem 1.05rem; /* 0.7/1.4*0.75 */
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.675rem; /* 0.9*0.75 */
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-            color: white;
-            border-radius: 50%;
+            gap: 0.375rem;
+            box-shadow: 0 7.5px 13.5px -6px rgba(99,102,241,0.4);
+            transition: all 0.2s;
+            cursor: pointer;
             text-decoration: none;
-            transition: transform 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
         }
 
-        .modal-socials a:hover {
-            transform: translateY(-3px);
+        .btn-gradient-outline {
+            background: transparent;
+            border: 1.5px solid var(--primary-indigo);
+            color: var(--primary-indigo);
+            box-shadow: none;
         }
 
-        .modal-form {
+        /* ---------- HOME PAGE ---------- */
+        .home-container {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            align-items: center;
+            max-width: 375px; /* 500*0.75 */
+            margin: 0 auto;
         }
 
-        .modal-form input,
-        .modal-form textarea {
-            padding: 0.8rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
+        .profile-large {
+            width: 112px; /* 150*0.75 */
+            height: 112px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 15px 22px -6px rgba(99,102,241,0.3);
+            margin-bottom: 0.75rem;
         }
 
-        .modal-form textarea {
-            resize: vertical;
-            min-height: 100px;
+        .hero-title {
+            font-size: 1.2rem; /* 1.6*0.75 */
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.3;
         }
 
-        /* Responsive adjustments */
-        @media (min-width: 768px) {
-            html {
-                font-size: 16px;
-            }
-            
-            .bottom-nav {
-                display: none;
-            }
-            
-            .nav-links {
-                display: flex;
-                gap: 1.5rem;
-            }
-            
-            .nav-links a {
-                text-decoration: none;
-                color: var(--text-dark);
-                font-size: 0.9rem;
-                transition: color 0.3s;
-            }
-            
-            .nav-links a:hover {
-                color: var(--primary-blue);
-            }
-            
-            section {
-                max-width: 800px;
-                margin: 0 auto;
-                left: 50%;
-                transform: translateX(-50%) translateX(20px);
-            }
-            
-            section.active {
-                transform: translateX(-50%) translateX(0);
-            }
-            
-            .skills-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .language-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .hobbies-grid {
-                grid-template-columns: repeat(6, 1fr);
-            }
-            
-            .profile-img-container {
-                width: 200px; /* Even larger on desktop */
-                height: 200px;
-            }
+        .hero-title span {
+            font-size: 0.75rem; /* 1*0.75 */
+            font-weight: 400;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 0.225rem;
         }
 
-        /* Animation for scroll-triggered elements */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s, transform 0.6s;
+        .blue-highlight {
+            color: var(--primary-indigo);
+            font-weight: 600;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .logo-strip {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.9rem 1.125rem; /* 1.2/1.5*0.75 */
+            margin: 1.35rem 0;
+        }
+
+        .mini-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 52px; /* 70*0.75 */
+        }
+
+        .mini-logo img {
+            width: 39px; /* 52*0.75 */
+            height: 39px;
+            object-fit: contain;
+            border-radius: 10.5px;
+            background: white;
+            padding: 3px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .mini-logo span {
+            font-size: 0.4875rem; /* 0.65*0.75 */
+            font-weight: 600;
+            margin-top: 0.15rem;
+            color: var(--text-dark);
+        }
+
+        .social-row {
+            display: flex;
+            gap: 0.75rem; /* 1*0.75 */
+            margin: 1.125rem 0 0.375rem;
+        }
+
+        .social-circle {
+            width: 33px; /* 44*0.75 */
+            height: 33px;
+            background: linear-gradient(145deg, white, #f1f5f9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-indigo);
+            font-size: 1rem; /* 1.3*0.75 approx */
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: 0.2s;
+        }
+
+        /* ---------- COMPANIES GRID ---------- */
+        .companies-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.125rem;
+        }
+
+        .phone-mock {
+            background: #f1f5f9;
+            border-radius: 18px; /* 24*0.75 */
+            padding: 0.6rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            justify-content: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .phone-mock img {
+            max-width: 100%;
+            max-height: 135px; /* 180*0.75 */
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .company-desc ul {
+            list-style: none;
+            margin: 0.6rem 0;
+        }
+        .company-desc li {
+            margin-bottom: 0.3rem;
+            font-size: 0.675rem;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+        .company-desc i {
+            color: var(--primary-indigo);
+            width: 0.9rem;
+        }
+
+        /* ---------- SKILLS 10 ITEMS ---------- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.6rem;
+        }
+        .skill-pill {
+            background: var(--card-white);
+            border-radius: 30px;
+            padding: 0.75rem 0.75rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+            font-size: 0.675rem;
+        }
+        .skill-pill i {
+            font-size: 1.05rem;
+            color: var(--primary-indigo);
+        }
+
+        /* ---------- LANGUAGES ---------- */
+        .lang-modern {
+            display: flex;
+            flex-direction: column;
+            gap: 1.125rem;
+        }
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .lang-name {
+            width: 60px;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+        .lang-level {
+            flex: 1;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .lang-fill {
+            height: 6px;
+            border-radius: 15px;
+            background: linear-gradient(90deg, var(--primary-indigo), var(--primary-purple));
+            width: 0%;
+            transition: width 0.6s;
+        }
+        .lang-percent {
+            font-weight: 600;
+            color: var(--primary-indigo);
+            width: 34px;
+            font-size: 0.675rem;
+        }
+
+        /* ---------- AUTOBIOGRAPHY ---------- */
+        .bio-text {
+            max-height: 225px; /* 300*0.75 */
+            overflow: hidden;
+            transition: max-height 0.5s;
+        }
+        .bio-text.expanded {
+            max-height: 2250px; /* 3000*0.75 */
+        }
+        .bio-text p {
+            font-size: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .read-more-btn {
+            width: 100%;
+            margin-top: 0.9rem;
+            background: var(--card-white);
+            border: 1px dashed var(--primary-indigo);
+            color: var(--primary-indigo);
+        }
+
+        /* ---------- CONTACT REDESIGN ---------- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+        .contact-tile {
+            background: var(--card-white);
+            border-radius: 18px;
+            padding: 0.9rem 0.6rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: 0.15s;
+            font-size: 0.75rem;
+        }
+        .contact-tile i {
+            font-size: 1.5rem; /* 2*0.75 */
+            background: linear-gradient(145deg, var(--primary-indigo), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.225rem;
+        }
+
+        /* ---------- MODAL ---------- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 28px;
+            padding: 1.5rem;
+            max-width: 285px; /* 380*0.75 */
+            width: 90%;
+            box-shadow: 0 22px 45px rgba(0,0,0,0.2);
+        }
+        .modal-content h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
+        .modal-content p, .modal-content input, .modal-content textarea, .modal-content button {
+            font-size: 0.75rem;
+        }
+        .modal-content input, .modal-content textarea {
+            padding: 0.6rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-light);
+            margin-bottom: 0.6rem;
+            width: 100%;
+        }
+
+        /* responsiveness */
+        @media (min-width: 600px) {
+            .skills-grid { grid-template-columns: repeat(3,1fr); }
+            .contact-grid { grid-template-columns: repeat(4,1fr); }
         }
     </style>
 </head>
 <body>
-    <!-- Top Navigation -->
-    <nav class="navbar">
-        <div class="logo">Jubel Mobela</div>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#companies">Companies</a>
-            <a href="#education">Education</a>
-            <a href="#experience">Experience</a>
-            <a href="#skills">Skills</a>
-            <a href="#languages">Languages</a>
-            <a href="#hobbies">Hobbies</a>
-            <a href="#autobiography">Autobiography</a>
-            <a href="#contact">Contact</a>
+    <!-- Fixed top bar with mini profile -->
+    <div class="top-bar">
+        <div class="logo-area">
+            <img src="zamlift.jpg" alt="Jubel" class="mini-profile" onerror="this.src='https://via.placeholder.com/28'">
+            <span class="logo-text">Jubel Mobela</span>
         </div>
-    </nav>
+        <div class="header-icons">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-sliders-h"></i>
+        </div>
+    </div>
 
-    <!-- Sections Container -->
+    <!-- Sections container -->
     <div class="sections-container">
-        <!-- Home Section - NOW BETTER CENTERED -->
+        <!-- HOME (active by default) -->
         <section id="home" class="active">
             <div class="home-container">
-                <div class="profile-img-container">
-                    <img src="zamlift.jpg" alt="Portrait of Jubel Mobela">
-                </div>
-                
+                <img src="zamlift.jpg" alt="Jubel" class="profile-large" onerror="this.src='https://via.placeholder.com/112'">
                 <h1 class="hero-title">
                     Jubel Mobela<br>
-                    <span>
-                        Founder & CEO of 
-                        <span class="blue">BUFFER ZONE</span>,
-                        <span class="blue">ZAMBIA TRANSPORT LOGISTICS</span>, &
-                        <span class="blue">MIRROR HOUSE</span>
-                    </span>
+                    <span>Founder & CEO of <span class="blue-highlight">BUFFER ZONE</span>, <span class="blue-highlight">ZATRALO</span>, <span class="blue-highlight">MIRROR HOUSE</span>, <span class="blue-highlight">ZYNAPSE</span> & <span class="blue-highlight">JUBEL</span></span>
                 </h1>
-                
-                <div class="contact-options">
-                    <a href="https://www.facebook.com/mcjubeldrake.mobela" class="social-icon" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/yourusername" class="social-icon" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/yourusername" class="social-icon" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://wa.me/260768658484" class="social-icon" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="mailto:jubelmobz19@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+                <div class="social-row">
+                    <a href="#" class="social-circle"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-circle"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-circle"><i class="fab fa-whatsapp"></i></a>
                 </div>
-                
-                <p class="professional-tagline">
-                    Results-driven <strong>DEVELOPER and IT Technician</strong> with expertise in <strong>troubleshooting</strong>,
-                    <strong>system administration</strong>, and <strong>network management</strong>.
+                <!-- company logos strip -->
+                <div class="logo-strip">
+                    <div class="mini-logo"><img src="BZ.png" alt="BZ" onerror="this.src='https://via.placeholder.com/39'"><span>BUFFER ZONE</span></div>
+                    <div class="mini-logo"><img src="ZT.png" alt="ZT" onerror="this.src='https://via.placeholder.com/39'"><span>ZATRALO</span></div>
+                    <div class="mini-logo"><img src="MH.png" alt="MH" onerror="this.src='https://via.placeholder.com/39'"><span>MIRROR</span></div>
+                    <div class="mini-logo"><img src="zynapse.png" alt="zynapse" onerror="this.src='https://via.placeholder.com/39'"><span>ZYNAPSE</span></div>
+                    <div class="mini-logo"><img src="jubel.png" alt="jubel" onerror="this.src='https://via.placeholder.com/39'"><span>JUBEL</span></div>
+                </div>
+                <p class="professional-tagline" style="text-align: center; color: var(--text-muted); margin: 0.75rem 0; font-size:0.75rem;">
+                    IT Technician · Developer · Serial entrepreneur
                 </p>
-                
-                <!-- Company Logos Section -->
-                <div class="company-logos">
-                    <div class="company-logo">
-                        <img src="BZ.png" alt="Buffer Zone Logo">
-                        <span>BUFFER ZONE</span>
-                    </div>
-                    <div class="company-logo">
-                        <img src="ZT.png" alt="Zatralo Logo">
-                        <span>ZATRALO</span>
-                    </div>
-                    <div class="company-logo">
-                        <img src="MH.png" alt="Mirror House Logo">
-                        <span>MIRROR HOUSE</span>
-                    </div>
-                </div>
-                
-                <div class="action-buttons">
-                    <a href="jubel_mobela_cv.pdf" download="Jubel_Mobela_CV.pdf" class="tour-btn"><i class="fas fa-download"></i> Download CV</a>
-                    <button class="tour-btn outline" onclick="showModal()"><i class="fas fa-briefcase"></i> Hire Me</button>
+                <div style="display: flex; gap: 0.75rem;">
+                    <a href="#" class="btn-gradient"><i class="fas fa-download"></i> CV</a>
+                    <button class="btn-gradient btn-gradient-outline" onclick="showModal()"><i class="fas fa-briefcase"></i> Hire</button>
                 </div>
             </div>
         </section>
 
-        <!-- Companies Section -->
+        <!-- COMPANIES (with Zynapse & Jubel) -->
         <section id="companies">
-            <h2 class="section-title">Companies</h2>
+            <h2 class="section-title"><i class="fas fa-building"></i> My Companies</h2>
             <div class="companies-grid">
-                <div class="card company-card">
-                    <div class="phone-frame">
-                        <img src="bufferzone.jpg" alt="Buffer Zone App Screenshot">
-                    </div>
-                    <h3>BUFFER ZONE</h3>
-                    <p><strong>Creative Design & Web Development Studio</strong></p>
-                    <div class="company-description">
-                        <p><strong>BUFFER ZONE</strong> is a <strong>graphic design</strong> and <strong>web development</strong> company based in Ndola and Luanshya, Zambia.</p>
-                        <ul>
-                            <li><strong>50% down payment</strong> before project initiation</li>
-                            <li>Payments via <strong>MTN/Airtel Mobile Money</strong></li>
-                        </ul>
-                    </div>
-                    <a href="https://205.206.225.114/bufferzone/Home.html" class="tour-btn" target="_blank" style="display: block; text-align: center; margin-top: 1rem;">Visit Website</a>
+                <!-- Buffer zone -->
+                <div class="ios-card company-card">
+                    <div class="phone-mock"><img src="bufferzone.jpg" alt="Buffer Zone" onerror="this.src='https://via.placeholder.com/150x90'"></div>
+                    <h3 style="font-size:1rem;">BUFFER ZONE</h3>
+                    <p class="company-desc" style="font-size:0.75rem;"><strong>Creative design & web dev studio</strong> – 50% down payment, mobile money.</p>
+                    <a href="#" class="btn-gradient" style="align-self: flex-start;">Visit platform</a>
                 </div>
-
-                <div class="card company-card">
-                    <div class="phone-frame">
-                        <img src="zatralo.jpg" alt="ZATRALO App Screenshot">
-                    </div>
-                    <h3>ZATRALO</h3>
-                    <p><strong>Transport-Tech Startup Platform</strong></p>
-                    <div class="company-description">
-                        <p><strong>ZATRALO</strong> (Zambia Transport Logistics) is a <strong>digital platform</strong> enabling <strong>convenient online bus ticket booking</strong>.</p>
+                <!-- Zatralo -->
+                <div class="ios-card company-card">
+                    <div class="phone-mock"><img src="zatralo.jpg" alt="Zatralo" onerror="this.src='https://via.placeholder.com/150x90'"></div>
+                    <h3 style="font-size:1rem;">ZATRALO (Zambia Transport Logistics)</h3>
+                    <p class="company-desc" style="font-size:0.75rem;">Digital bus ticketing · mobile money · digital ticket.</p>
+                    <a href="#" class="btn-gradient">Visit platform</a>
+                </div>
+                <!-- Zynapse -->
+                <div class="ios-card company-card">
+                    <div class="phone-mock"><img src="zyn.png" alt="Zynapse" onerror="this.src='https://via.placeholder.com/150x90'"></div>
+                    <h3 style="font-size:1rem;">ZYNAPSE <span style="font-size: 0.6rem; background: #eef2ff; padding: 0.15rem 0.6rem; border-radius: 30px;">secure · chat · call</span></h3>
+                    <div class="company-desc" style="font-size:0.75rem;">
+                        <p><strong>Advanced, protected chatting app</strong> – end‑to‑end encryption, video/audio calls, text, file share. Built for privacy.</p>
                         <ul>
-                            <li>Buy bus tickets <strong>any where around</strong> the country</li>
-                            <li>Pay with <strong>mobile money</strong></li>
-                            <li>Save, Print or share <strong>your DIGITAL TICKET</strong></li>
+                            <li><i class="fas fa-lock"></i> Encrypted conversations</li>
+                            <li><i class="fas fa-video"></i> HD video/audio calls</li>
+                            <li><i class="fas fa-shield-alt"></i> Self‑destruct messages</li>
                         </ul>
                     </div>
-                    <a href="https://zatralo.com" class="tour-btn" target="_blank" style="display: block; text-align: center; margin-top: 1rem;">Visit Platform</a>
+                    <a href="#" class="btn-gradient">Visit Zynapse</a>
+                </div>
+                <!-- Jubel -->
+                <div class="ios-card company-card">
+                    <div class="phone-mock"><img src="jub.png" alt="Jubel" onerror="this.src='https://via.placeholder.com/150x90'"></div>
+                    <h3 style="font-size:1rem;">JUBEL <span style="font-size: 0.6rem; background: #eef2ff; padding: 0.15rem 0.6rem; border-radius: 30px;">ride · delivery · transport</span></h3>
+                    <div class="company-desc" style="font-size:0.75rem;">
+                        <p><strong>All-in-one ride share & delivery</strong> – book rides, send packages, food delivery, real‑time tracking.</p>
+                        <ul>
+                            <li><i class="fas fa-car"></i> Affordable rides (JubelGo, JubelXL)</li>
+                            <li><i class="fas fa-truck"></i> Parcel & food delivery</li>
+                            <li><i class="fas fa-clock"></i> 24/7 support & share ride</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-gradient">Visit Jubel</a>
                 </div>
             </div>
         </section>
 
-        <!-- Education Section -->
+        <!-- EDUCATION -->
         <section id="education">
-            <h2 class="section-title">Education</h2>
-            <div class="education-timeline">
-                <div class="card education-item">
-                    <h3>Luso Private School</h3>
-                    <p>Grades 1 – 5</p>
-                    <p>Developed foundational literacy, numeracy, and problem-solving skills</p>
-                </div>
-                
-                <div class="card education-item">
-                    <h3>Nkana Basic School</h3>
-                    <p>Grades 5 – 7 (2013)</p>
-                    <p>Junior Secondary Certificate with focus on Mathematics, English, and Science</p>
-                </div>
-
-                <div class="card education-item">
-                    <h3>Malela Secondary School</h3>
-                    <p>Grade 12 Certificate (2018)</p>
-                    <p>Emphasis on science and technology subjects, demonstrated academic discipline</p>
-                </div>
-
-                <div class="card education-item">
-                    <h3>Northern Technical College (NORTEC)</h3>
-                    <p>Diploma in Computer Systems Engineering (2023)</p>
-                    <p>Awarded Best Student of 2023 for academic excellence and technical performance</p>
-                </div>
-            </div>
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="ios-card" style="font-size:0.75rem;"><strong>Luso Private School</strong> – Grades 1–5 (foundational literacy, numeracy)</div>
+            <div class="ios-card" style="font-size:0.75rem;"><strong>Nkana Basic School</strong> – Grades 5–7 (2013) Junior Secondary Certificate</div>
+            <div class="ios-card" style="font-size:0.75rem;"><strong>Malela Secondary School</strong> – Grade 12 Certificate (2018) science & technology</div>
+            <div class="ios-card" style="font-size:0.75rem;"><strong>Northern Technical College (NORTEC)</strong> – Diploma in Computer Systems Engineering (2023) Best Student 2023</div>
         </section>
 
-        <!-- Experience Section -->
+        <!-- EXPERIENCE -->
         <section id="experience">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <div class="card timeline-item">
-                    <h3>ZAMLIFT</h3>
-                    <h4>I.T Technician / Customer Care | 2024 – Present</h4>
-                    <ul>
-                        <li>Manage organization's IT infrastructure (hardware, software, networks)</li>
-                        <li>Implement cybersecurity protocols and conduct system upgrades</li>
-                        <li>Provide frontline technical support and customer care solutions</li>
-                    </ul>
-                </div>
-
-                <div class="card timeline-item">
-                    <h3>BEM MOTORS</h3>
-                    <h4>Auditor / I.T Technician Assistant | 2020 – 2021</h4>
-                    <ul>
-                        <li>Supported financial audits and compliance assessments</li>
-                        <li>Provided IT support including system troubleshooting</li>
-                        <li>Developed secure data management systems</li>
-                    </ul>
-                </div>
-
-                <div class="card timeline-item">
-                    <h3>LUSO PRIVATE SCHOOL</h3>
-                    <h4>Teacher / I.T Technician | 2019 – 2020</h4>
-                    <ul>
-                        <li>Taught ICT and computer literacy to 200+ students</li>
-                        <li>Maintained school IT infrastructure and equipment</li>
-                        <li>Provided technical support to staff and students</li>
-                    </ul>
-                </div>
-            </div>
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+            <div class="ios-card" style="font-size:0.75rem;"><strong>ZAMLIFT</strong> – I.T Technician / Customer Care (2024–Present). IT infrastructure, cybersecurity, support.</div>
+            <div class="ios-card" style="font-size:0.75rem;"><strong>BEM MOTORS</strong> – Auditor / I.T Technician Assistant (2020–2021). audits, IT support, data management.</div>
+            <div class="ios-card" style="font-size:0.75rem;"><strong>LUSO PRIVATE SCHOOL</strong> – Teacher / I.T Technician (2019–2020). taught ICT to 200+ students.</div>
         </section>
 
-        <!-- Skills Section -->
+        <!-- SKILLS (10 items) -->
         <section id="skills">
-            <h2 class="section-title">Technical Skills</h2>
+            <h2 class="section-title"><i class="fas fa-code"></i> 10 core skills</h2>
             <div class="skills-grid">
-                <div class="card skill-category">
-                    <h3>Technical Expertise</h3>
-                    <div class="skill-item">
-                        <h4>Network Administration</h4>
-                        <p>LAN/WAN setups, routers, switches, firewalls, network optimization</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Cybersecurity</h4>
-                        <p>Firewalls, antivirus, encryption, security audits</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Hardware Troubleshooting</h4>
-                        <p>Diagnostics, repairs, system assembly, upgrades</p>
-                    </div>
-                </div>
-
-                <div class="card skill-category">
-                    <h3>Development</h3>
-                    <div class="skill-item">
-                        <h4>Web Development</h4>
-                        <p>HTML, CSS, JavaScript, WordPress, React</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>Database Management</h4>
-                        <p>MySQL, PostgreSQL, data structuring, backups</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>API Integration</h4>
-                        <p>RESTful APIs, JSON/XML data handling</p>
-                    </div>
-                </div>
-
-                <div class="card skill-category">
-                    <h3>Design & Support</h3>
-                    <div class="skill-item">
-                        <h4>Graphic Design</h4>
-                        <p>Adobe Creative Suite, Photoshop, Illustrator</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>UI/UX Design</h4>
-                        <p>Wireframing, prototyping, user journey mapping</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>IT Support</h4>
-                        <p>Help desk operations, technical documentation</p>
-                    </div>
-                </div>
+                <div class="skill-pill"><i class="fas fa-network-wired"></i> Network admin</div>
+                <div class="skill-pill"><i class="fas fa-shield-halved"></i> Cybersecurity</div>
+                <div class="skill-pill"><i class="fas fa-hard-drive"></i> Hardware repair</div>
+                <div class="skill-pill"><i class="fab fa-js"></i> JavaScript/React</div>
+                <div class="skill-pill"><i class="fas fa-database"></i> MySQL · PostgreSQL</div>
+                <div class="skill-pill"><i class="fas fa-cloud"></i> API integration</div>
+                <div class="skill-pill"><i class="fas fa-paint-brush"></i> Graphic design</div>
+                <div class="skill-pill"><i class="fas fa-mobile-alt"></i> UI/UX prototyping</div>
+                <div class="skill-pill"><i class="fas fa-headset"></i> IT support</div>
+                <div class="skill-pill"><i class="fas fa-chart-line"></i> System audit</div>
             </div>
         </section>
 
-        <!-- Languages Section -->
+        <!-- LANGUAGES (only 3) -->
         <section id="languages">
-            <h2 class="section-title">Languages</h2>
-            <div class="language-grid">
-                <div class="card language-item" data-percent="100">
-                    <i class="fas fa-flag-usa"></i>
-                    <h4>English</h4>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
+            <h2 class="section-title"><i class="fas fa-language"></i> Languages</h2>
+            <div class="ios-card lang-modern">
+                <div class="lang-item" data-percent="100">
+                    <span class="lang-name">English</span>
+                    <div class="lang-level"><div class="lang-fill" style="width:100%"></div></div>
+                    <span class="lang-percent">100%</span>
                 </div>
-                <div class="card language-item" data-percent="90">
-                    <i class="fas fa-comment-dots"></i>
-                    <h4>Bemba</h4>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="lang-item" data-percent="95">
+                    <span class="lang-name">Bemba</span>
+                    <div class="lang-level"><div class="lang-fill" style="width:95%"></div></div>
+                    <span class="lang-percent">95%</span>
                 </div>
-                <div class="card language-item" data-percent="40">
-                    <i class="fas fa-volume-down"></i>
-                    <h4>Nyanja</h4>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
-                </div>
-                <div class="card language-item" data-percent="65">
-                    <i class="fas fa-handshake"></i>
-                    <h4>Lamba</h4>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
-                </div>
-                <div class="card language-item" data-percent="65">
-                    <i class="fas fa-comments"></i>
-                    <h4>French</h4>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
-                </div>
-                <div class="card language-item" data-percent="65">
-                    <i class="fas fa-globe-europe"></i>
-                    <h4>Spanish</h4>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="lang-item" data-percent="70">
+                    <span class="lang-name">Nyanja</span>
+                    <div class="lang-level"><div class="lang-fill" style="width:70%"></div></div>
+                    <span class="lang-percent">70%</span>
                 </div>
             </div>
         </section>
 
-        <!-- Hobbies Section - UPDATED WITH 9 ADDITIONAL HOBBIES -->
+        <!-- HOBBIES (15 items) -->
         <section id="hobbies">
-            <h2 class="section-title">Hobbies</h2>
-            <div class="hobbies-grid">
-                <div class="hobby-item">
-                    <i class="fas fa-book"></i>
-                    <h4>Reading</h4>
-                    <p>Business strategy & tech innovation</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-pen-nib"></i>
-                    <h4>Writing</h4>
-                    <p>Technical documentation & blogs</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-pen-nib"></i>
-                    <h4>Poetry</h4>
-                    <p>Emotional expression and rhyming</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-running"></i>
-                    <h4>Running</h4>
-                    <p>Morning 5k routines</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-paint-brush"></i>
-                    <h4>Drawing</h4>
-                    <p>Digital art & concept design</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-music"></i>
-                    <h4>Music</h4>
-                    <p>Focus-enhancing playlists</p>
-                </div>
-                <!-- Additional 9 hobbies -->
-                <div class="hobby-item">
-                    <i class="fas fa-film"></i>
-                    <h4>Movies</h4>
-                    <p>Documentaries & sci-fi films</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-futbol"></i>
-                    <h4>Football</h4>
-                    <p>Playing & watching matches</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-theater-masks"></i>
-                    <h4>Comedy</h4>
-                    <p>Stand-up & improv shows</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-utensils"></i>
-                    <h4>Cooking</h4>
-                    <p>Trying new recipes</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-hiking"></i>
-                    <h4>Hiking</h4>
-                    <p>Exploring nature trails</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-gamepad"></i>
-                    <h4>Gaming</h4>
-                    <p>Strategy & puzzle games</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-camera"></i>
-                    <h4>Photography</h4>
-                    <p>Landscape & urban shots</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-chess"></i>
-                    <h4>Chess</h4>
-                    <p>Strategic thinking games</p>
-                </div>
-                <div class="hobby-item">
-                    <i class="fas fa-plane"></i>
-                    <h4>Travel</h4>
-                    <p>Exploring new cultures</p>
-                </div>
+            <h2 class="section-title"><i class="fas fa-heart"></i> Hobbies</h2>
+            <div class="skills-grid" style="grid-template-columns: repeat(3,1fr);">
+                <div class="skill-pill"><i class="fas fa-book"></i> Reading</div>
+                <div class="skill-pill"><i class="fas fa-pen-nib"></i> Writing</div>
+                <div class="skill-pill"><i class="fas fa-pen-nib"></i> Poetry</div>
+                <div class="skill-pill"><i class="fas fa-running"></i> Running</div>
+                <div class="skill-pill"><i class="fas fa-paint-brush"></i> Drawing</div>
+                <div class="skill-pill"><i class="fas fa-music"></i> Music</div>
+                <div class="skill-pill"><i class="fas fa-film"></i> Movies</div>
+                <div class="skill-pill"><i class="fas fa-futbol"></i> Football</div>
+                <div class="skill-pill"><i class="fas fa-theater-masks"></i> Comedy</div>
+                <div class="skill-pill"><i class="fas fa-utensils"></i> Cooking</div>
+                <div class="skill-pill"><i class="fas fa-hiking"></i> Hiking</div>
+                <div class="skill-pill"><i class="fas fa-gamepad"></i> Gaming</div>
+                <div class="skill-pill"><i class="fas fa-camera"></i> Photography</div>
+                <div class="skill-pill"><i class="fas fa-chess"></i> Chess</div>
+                <div class="skill-pill"><i class="fas fa-plane"></i> Travel</div>
             </div>
         </section>
 
-        <!-- Autobiography Section -->
+        <!-- AUTOBIOGRAPHY (FULL) -->
         <section id="autobiography">
-            <h2 class="section-title">My Journey</h2>
-            <div class="card bio-content" id="bioContent">
-                <p><strong>Every Breath is a Second Chance: The Autobiography of Jubel Mobela</strong></p>
-
-                <p>My name is <strong>Jubel Mobela</strong>, and this is my story—a journey shaped by struggle, lifted by hope, and driven by the belief that <strong>every breath is a second chance</strong>. From humble beginnings in Luanshya, Zambia, to the foundation of growing tech enterprises, my life has never followed a straight path.</p>
-                
-                <p>I was born on <strong>July 21, 2002</strong>, in Luanshya, Zambia, during a time of personal and familial transition. When my parents separated at a young age, I began a life marked by movement—both physical and emotional. I first lived with my grandmother, who offered me her <strong>warmth</strong> and <strong>strength</strong>.</p>
-                
-                <button class="read-more" onclick="expandBio()">
-                    <i class="fas fa-book-open"></i> Read More About My Journey
-                </button>
+            <h2 class="section-title"><i class="fas fa-book"></i> My Journey</h2>
+            <div class="ios-card">
+                <div class="bio-text" id="bioText">
+                    <p><strong>Every Breath is a Second Chance: The Autobiography of Jubel Mobela</strong></p>
+                    <p>My name is <strong>Jubel Mobela</strong>, and this is my story—a journey shaped by struggle, lifted by hope, and driven by the belief that <strong>every breath is a second chance</strong>. From humble beginnings in Luanshya, Zambia, to the foundation of growing tech enterprises, my life has never followed a straight path.</p>
+                    <p>I was born on <strong>July 21, 2002</strong>, in Luanshya, Zambia, during a time of personal and familial transition. When my parents separated at a young age, I began a life marked by movement—both physical and emotional. I first lived with my grandmother, who offered me her <strong>warmth</strong> and <strong>strength</strong>. Over the years, I moved between various relatives: from Kitwe to Lusaka, then back to Luanshya each place offering new challenges, new beginnings, and <strong>second chances</strong> to find stability.</p>
+                    <p><strong>Chapter 1: A Childhood in Motion</strong> – Though life often felt unpredictable, I learned to embrace each new environment. <strong>Change became my constant companion</strong>, and <strong>adaptability became a necessity</strong>. My early school years saw similar shifts. I began in a private school in Kitwe, only to transfer to a public school in Nkana East. After my aunt's husband passed away, I moved back and forth between families. But through it all, I remained <strong>resilient</strong>. Each move was a <strong>breath</strong> a new chance to learn, grow, and hold on to the hope that things would get better.</p>
+                    <p><strong>Chapter 2: Education as Escape and Empowerment</strong> – <strong>Education became my anchor</strong>. At Nkana Basic School in Kitwe, from Grade 5 to Grade 7, I poured my energy into academics and graduated with <strong>high marks</strong>. It was the first time I felt that my hard work could truly open doors for me. I continued my journey at Malela Secondary School, where I sat for my Grade 12 exams in 2018—and passed with <strong>excellence</strong>. School was more than a place of learning. It was where I began to imagine a future beyond struggle. Every lesson, every exam, every long walk to class was a <strong>breath</strong> a <strong>second chance</strong> to rewrite my future.</p>
+                    <p><strong>Chapter 3: Stepping Into the World</strong> – In 2019, I took my first steps into the professional world as a teacher at a private school. For two years, I taught students not just what was in their textbooks, but what I was learning myself—that you could come from little and still <strong>dream big</strong>. I learned how to <strong>communicate</strong>, <strong>lead</strong>, and <strong>inspire</strong>—skills that would shape the rest of my life. Then in 2021, I interned at Power Tools Logistics as an <strong>auditor</strong>. It was my first true exposure to the corporate world. I was now wearing formal shoes, sitting in boardrooms, handling data, and solving real business problems. It felt like I had walked through a door I once thought was closed to me. Every experience was a new <strong>breath</strong>. A <strong>second chance</strong> to discover who I could be.</p>
+                    <p><strong>Chapter 4: The Tech Path and a Turning Point</strong> – My love for <strong>technology</strong> had always been simmering beneath the surface. In 2022, I followed that passion to <strong>Northern Technical College (NORTEC)</strong> in Ndola, enrolling in a Diploma in Computer Systems Engineering. I poured everything into my studies, earning recognition as the <strong>best student</strong> year after year. For the first time, I didn't just feel like I belonged I felt like I was <strong>thriving</strong>. But life reminded me that growth often walks hand in hand with <strong>grief</strong>. Just before graduation in September 2023, I <strong>lost my father</strong>. The pain was overwhelming, and for a moment, it felt like time stood still. But in the silence that followed, I remembered that each breath was still mine to take—and that meant I had another chance to carry on, in his honor. His passing didn't end my journey. It <strong>sharpened my purpose</strong>.</p>
+                    <p><strong>Chapter 5: Building a Future from the Ground Up</strong> – In mid-2024, I joined <strong>Zamlift</strong> as an IT Technician, working hands-on with systems, networks, and digital infrastructure. It felt like everything I had learned was finally being put to use. But my ambitions didn't stop there. I launched <strong>BUFFER ZONE</strong>, a graphic design and tech company I ran as a side hustle. It was a passion project born out of <strong>creativity</strong>, <strong>curiosity</strong>, and a desire to <strong>empower small businesses</strong> with digital tools. In early 2025, I took an even bigger leap by founding <strong>Zatralo Zambia</strong>, an online platform that allows Zambians to easily purchase bus tickets. It was a solution to a problem I had seen firsthand—a digital bridge connecting people with the <strong>freedom to travel</strong>, plan, and explore.</p>
+                    <p><strong>Chapter 5½: Two New Ventures – Zynapse & Jubel</strong> – Driven by the belief that technology can transform everyday life, I expanded my vision. I founded <strong>Zynapse</strong>, a next‑generation communication app built with privacy at its core. Zynapse offers end‑to‑end encrypted messaging, high‑definition video and audio calls, and secure file sharing — a protected space for conversations. Soon after, I launched <strong>Jubel</strong>, a comprehensive ride‑share and delivery platform. Jubel provides affordable rides (JubelGo, JubelXL), parcel and food delivery, real‑time tracking, and 24/7 support. Both companies reflect my commitment to solving real problems: safe communication and seamless transport. They are my latest <strong>second chances</strong> to make a difference.</p>
+                    <p><strong>Chapter 6: Looking Forward</strong> – I believe in the power of <strong>resilience</strong>, the magic of <strong>ideas</strong>, and the necessity of taking <strong>risks</strong>. My goal is not just to succeed for myself, but to leave behind systems, platforms, and tools that empower others. From the child who moved from house to house, to the entrepreneur building digital platforms I am a testament to what happens when you <strong>don't give up</strong>. When you see each moment not as an ending, but as an invitation to <strong>begin again</strong>.</p>
+                    <p><strong>Final Words</strong> – Every struggle I've faced, every loss I've endured, and every success I've celebrated has reminded me of one thing: <strong>Every breath is a second chance.</strong> A second chance to learn. A second chance to grow. A second chance to build the life you believe in.</p>
+                    <p><em>"Start small, remain focused, and always be ready to grow."<br>— Jubel Mobela</em></p>
+                </div>
+                <button class="btn-gradient read-more-btn" onclick="toggleBio()"><i class="fas fa-chevron-down"></i> Read full story</button>
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- CONTACT -->
         <section id="contact">
-            <h2 class="section-title">Contact Me</h2>
-            <div class="contact-info">
-                <a href="mailto:jubelmobz19@gmail.com" class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>Email</h4>
-                        <p>jubelmobz19@gmail.com</p>
-                    </div>
-                </a>
-                
-                <a href="https://wa.me/260768658484" class="contact-item" target="_blank">
-                    <div class="contact-icon">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>WhatsApp</h4>
-                        <p>+260 768 658 484</p>
-                    </div>
-                </a>
-                
-                <a href="https://www.facebook.com/mcjubeldrake.mobela" class="contact-item" target="_blank">
-                    <div class="contact-icon">
-                        <i class="fab fa-facebook"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>Facebook</h4>
-                        <p>Jubel Mobela</p>
-                    </div>
-                </a>
-                
-                <a href="https://www.linkedin.com/in/yourusername" class="contact-item" target="_blank">
-                    <div class="contact-icon">
-                        <i class="fab fa-linkedin"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>LinkedIn</h4>
-                        <p>Jubel Mobela</p>
-                    </div>
-                </a>
+            <h2 class="section-title"><i class="fas fa-envelope"></i> Contact</h2>
+            <div class="contact-grid">
+                <a href="mailto:jubelmobz19@gmail.com" class="contact-tile"><i class="fas fa-envelope"></i><span>Email</span></a>
+                <a href="https://wa.me/260768658484" class="contact-tile"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+                <a href="#" class="contact-tile"><i class="fab fa-facebook"></i><span>Facebook</span></a>
+                <a href="#" class="contact-tile"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+                <a href="#" class="contact-tile"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+                <a href="#" class="contact-tile" onclick="showModal();return false;"><i class="fas fa-paper-plane"></i><span>Message</span></a>
             </div>
-            
-            <button class="tour-btn" onclick="showModal()" style="width: 100%;"><i class="fas fa-paper-plane"></i> Send Message</button>
         </section>
     </div>
 
-   <!-- Bottom Navigation - IMPROVED FOR ALL SECTIONS -->
+    <!-- Bottom Navigation -->
     <div class="bottom-nav">
-        <a href="#home" class="nav-item active" data-section="home">
-            <i class="fas fa-home nav-icon"></i>
-            <span>Home</span>
-        </a>
-        <a href="#companies" class="nav-item" data-section="companies">
-            <i class="fas fa-building nav-icon"></i>
-            <span>Companies</span>
-        </a>
-        <a href="#education" class="nav-item" data-section="education">
-            <i class="fas fa-graduation-cap nav-icon"></i>
-            <span>Education</span>
-        </a>
-        <a href="#experience" class="nav-item" data-section="experience">
-            <i class="fas fa-briefcase nav-icon"></i>
-            <span>Experience</span>
-        </a>
-        <a href="#skills" class="nav-item" data-section="skills">
-            <i class="fas fa-code nav-icon"></i>
-            <span>Skills</span>
-        </a>
-        <a href="#languages" class="nav-item" data-section="languages">
-            <i class="fas fa-language nav-icon"></i>
-            <span>Languages</span>
-        </a>
-        <a href="#hobbies" class="nav-item" data-section="hobbies">
-            <i class="fas fa-heart nav-icon"></i>
-            <span>Hobbies</span>
-        </a>
-        <a href="#autobiography" class="nav-item" data-section="autobiography">
-            <i class="fas fa-book nav-icon"></i>
-            <span>Story</span>
-        </a>
-        <a href="#contact" class="nav-item" data-section="contact">
-            <i class="fas fa-envelope nav-icon"></i>
-            <span>Contact</span>
-        </a>
+        <a href="#home" class="nav-item active" data-section="home"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="#companies" class="nav-item" data-section="companies"><i class="fas fa-building"></i><span>Companies</span></a>
+        <a href="#education" class="nav-item" data-section="education"><i class="fas fa-graduation-cap"></i><span>Education</span></a>
+        <a href="#experience" class="nav-item" data-section="experience"><i class="fas fa-briefcase"></i><span>Experience</span></a>
+        <a href="#skills" class="nav-item" data-section="skills"><i class="fas fa-code"></i><span>Skills</span></a>
+        <a href="#languages" class="nav-item" data-section="languages"><i class="fas fa-language"></i><span>Languages</span></a>
+        <a href="#hobbies" class="nav-item" data-section="hobbies"><i class="fas fa-heart"></i><span>Hobbies</span></a>
+        <a href="#autobiography" class="nav-item" data-section="autobiography"><i class="fas fa-book"></i><span>Story</span></a>
+        <a href="#contact" class="nav-item" data-section="contact"><i class="fas fa-envelope"></i><span>Contact</span></a>
     </div>
+
     <!-- Modal -->
     <div id="contactModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3>Let's Connect!</h3>
-            <p>Reach out through socials or send a direct message:</p>
-            
-            <div class="modal-socials">
-                <a href="https://www.facebook.com/mcjubeldrake.mobela" target="_blank" title="Facebook">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://wa.me/260768658484" target="_blank" title="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                <a href="https://www.instagram.com/yourusername" target="_blank" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="mailto:jubelmobz19@gmail.com" title="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
+            <span style="float:right; font-size:1.125rem; cursor:pointer;" onclick="closeModal()">&times;</span>
+            <h3>Let's connect</h3>
+            <div class="modal-socials" style="display:flex; gap:0.75rem; justify-content:center; margin:0.75rem 0;">
+                <a href="#" class="social-circle" style="width:33px; height:33px;"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="social-circle" style="width:33px; height:33px;"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="social-circle" style="width:33px; height:33px;"><i class="fab fa-linkedin"></i></a>
             </div>
-
-            <form class="modal-form" onsubmit="handleSubmit(event)">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea rows="4" placeholder="Your Message" required></textarea>
-                <button type="submit" class="tour-btn">Send Message</button>
+            <form class="modal-form" onsubmit="event.preventDefault(); alert('Message sent (demo)'); closeModal();">
+                <input type="text" placeholder="Your name">
+                <input type="email" placeholder="Email">
+                <textarea placeholder="Message" rows="3"></textarea>
+                <button class="btn-gradient" style="width:100%; margin-top:0.75rem;">Send</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Enhanced JavaScript for complete functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Navigation functionality
-            const navItems = document.querySelectorAll('.nav-item');
-            const sections = document.querySelectorAll('section');
-            
-            navItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Update active nav item
-                    navItems.forEach(nav => nav.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Show corresponding section with slide animation
-                    const sectionId = this.getAttribute('data-section');
-                    sections.forEach(section => {
-                        section.classList.remove('active');
-                        if (section.id === sectionId) {
-                            // Add a small delay to ensure the previous section is hidden
-                            setTimeout(() => {
-                                section.classList.add('active');
-                            }, 50);
-                        }
-                    });
-                    
-                    // NO SCROLLING - sections are positioned absolutely
+        // Navigation
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('section');
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                navItems.forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+                const sectionId = this.getAttribute('data-section');
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === sectionId) section.classList.add('active');
                 });
-            });
-
-            // Enhanced scroll animations
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        
-                        // Animate language progress bars when they come into view
-                        if (entry.target.classList.contains('language-item')) {
-                            const progressFill = entry.target.querySelector('.progress-fill');
-                            const percent = entry.target.getAttribute('data-percent');
-                            if (progressFill) {
-                                progressFill.style.width = percent + '%';
-                            }
-                        }
-                    }
-                });
-            }, observerOptions);
-
-            // Observe all animatable elements
-            const animatableElements = [
-                '.company-card',
-                '.education-item', 
-                '.timeline-item',
-                '.skill-category',
-                '.language-item',
-                '.hobby-item',
-                'section'
-            ];
-
-            animatableElements.forEach(selector => {
-                document.querySelectorAll(selector).forEach(el => {
-                    observer.observe(el);
-                });
-            });
-
-            // Enhanced modal functionality
-            const modal = document.getElementById('contactModal');
-            
-            window.showModal = function() {
-                if (modal) {
-                    modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                }
-            };
-
-            window.closeModal = function() {
-                if (modal) {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = '';
-                }
-            };
-
-            // Close modal with escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.style.display === 'flex') {
-                    closeModal();
-                }
-            });
-
-            // Close modal when clicking outside
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // Initialize language progress bars
-            document.querySelectorAll('.language-item').forEach(item => {
-                const percent = item.getAttribute('data-percent');
-                const fill = item.querySelector('.progress-fill');
-                if (fill) {
-                    // Don't animate immediately, wait for intersection observer
-                    fill.style.width = '0%';
-                }
             });
         });
 
-        // Biography expansion function
-        function expandBio() {
-            const bioContent = document.getElementById('bioContent');
-            const readMoreButton = document.querySelector('.read-more');
-            
-            if (bioContent.classList.contains('expanded')) {
-                bioContent.classList.remove('expanded');
-                readMoreButton.innerHTML = '<i class="fas fa-book-open"></i> Read More About My Journey';
+        // Autobiography expand/collapse
+        function toggleBio() {
+            const bio = document.getElementById('bioText');
+            bio.classList.toggle('expanded');
+            const btn = document.querySelector('.read-more-btn');
+            if (bio.classList.contains('expanded')) {
+                btn.innerHTML = '<i class="fas fa-chevron-up"></i> Read less';
             } else {
-                bioContent.classList.add('expanded');
-                readMoreButton.innerHTML = '<i class="fas fa-chevron-up"></i> Read Less';
-                
-                // Add the full biography content when expanded
-                if (!bioContent.querySelector('.full-bio')) {
-                    const fullBio = document.createElement('div');
-                    fullBio.className = 'full-bio';
-                    fullBio.innerHTML = `
-                        <p><strong>Chapter 1: A Childhood in Motion</strong></p>
-                        <p>I was born on <strong>July 21, 2002</strong>, in Luanshya, Zambia, during a time of personal and familial transition. When my parents separated at a young age, I began a life marked by movement—both physical and emotional. I first lived with my grandmother, who offered me her <strong>warmth</strong> and <strong>strength</strong>. Over the years, I moved between various relatives: from Kitwe to Lusaka, then back to Luanshya each place offering new challenges, new beginnings, and <strong>second chances</strong> to find stability.</p>
-                        
-                        <p>Though life often felt unpredictable, I learned to embrace each new environment. <strong>Change became my constant companion</strong>, and <strong>adaptability became a necessity</strong>. My early school years saw similar shifts. I began in a private school in Kitwe, only to transfer to a public school in Nkana East. After my aunt's husband passed away, I moved back and forth between families. But through it all, I remained <strong>resilient</strong>.</p>
-
-                        <p>Each move was a <strong>breath</strong> a new chance to learn, grow, and hold on to the hope that things would get better.</p>
-
-                        <p><strong>Chapter 2: Education as Escape and Empowerment</strong></p>
-                        <p><strong>Education became my anchor</strong>. At Nkana Basic School in Kitwe, from Grade 5 to Grade 7, I poured my energy into academics and graduated with <strong>high marks</strong>. It was the first time I felt that my hard work could truly open doors for me. I continued my journey at Malela Secondary School, where I sat for my Grade 12 exams in 2018—and passed with <strong>excellence</strong>.</p>
-
-                        <p>School was more than a place of learning. It was where I began to imagine a future beyond struggle. Every lesson, every exam, every long walk to class was a <strong>breath</strong> a <strong>second chance</strong> to rewrite my future.</p>
-
-                        <p><strong>Chapter 3: Stepping Into the World</strong></p>
-                        <p>In 2019, I took my first steps into the professional world as a teacher at a private school. For two years, I taught students not just what was in their textbooks, but what I was learning myself—that you could come from little and still <strong>dream big</strong>. I learned how to <strong>communicate</strong>, <strong>lead</strong>, and <strong>inspire</strong>—skills that would shape the rest of my life.</p>
-
-                        <p>Then in 2021, I interned at Power Tools Logistics as an <strong>auditor</strong>. It was my first true exposure to the corporate world. I was now wearing formal shoes, sitting in boardrooms, handling data, and solving real business problems. It felt like I had walked through a door I once thought was closed to me.</p>
-
-                        <p>Every experience was a new <strong>breath</strong>. A <strong>second chance</strong> to discover who I could be.</p>
-
-                        <p><strong>Chapter 4: The Tech Path and a Turning Point</strong></p>
-                        <p>My love for <strong>technology</strong> had always been simmering beneath the surface. In 2022, I followed that passion to <strong>Northern Technical College (NORTEC)</strong> in Ndola, enrolling in a Diploma in Computer Systems Engineering. I poured everything into my studies, earning recognition as the <strong>best student</strong> year after year. For the first time, I didn't just feel like I belonged I felt like I was <strong>thriving</strong>.</p>
-
-                        <p>But life reminded me that growth often walks hand in hand with <strong>grief</strong>. Just before graduation in September 2023, I <strong>lost my father</strong>. The pain was overwhelming, and for a moment, it felt like time stood still. But in the silence that followed, I remembered that each breath was still mine to take—and that meant I had another chance to carry on, in his honor.</p>
-
-                        <p>His passing didn't end my journey. It <strong>sharpened my purpose</strong>.</p>
-
-                        <p><strong>Chapter 5: Building a Future from the Ground Up</strong></p>
-                        <p>In mid-2024, I joined <strong>Zamlift</strong> as an IT Technician, working hands-on with systems, networks, and digital infrastructure. It felt like everything I had learned was finally being put to use.</p>
-
-                        <p>But my ambitions didn't stop there. I launched <strong>BUFFER ZONE</strong>, a graphic design and tech company I ran as a side hustle. It was a passion project born out of <strong>creativity</strong>, <strong>curiosity</strong>, and a desire to <strong>empower small businesses</strong> with digital tools.</p>
-
-                        <p>In early 2025, I took an even bigger leap by founding <strong>Zatralo Zambia</strong>, an online platform that allows Zambians to easily purchase bus tickets. It was a solution to a problem I had seen firsthand—a digital bridge connecting people with the <strong>freedom to travel</strong>, plan, and explore.</p>
-
-                        <p>These businesses were more than ventures. They were my <strong>breath</strong> my <strong>second chance</strong> to shape Zambia's future with <strong>innovation</strong>.</p>
-
-                        <p><strong>Chapter 6: Looking Forward</strong></p>
-                        <p>I believe in the power of <strong>resilience</strong>, the magic of <strong>ideas</strong>, and the necessity of taking <strong>risks</strong>. My goal is not just to succeed for myself, but to leave behind systems, platforms, and tools that empower others.</p>
-
-                        <p>From the child who moved from house to house, to the entrepreneur building digital platforms I am a testament to what happens when you <strong>don't give up</strong>. When you see each moment not as an ending, but as an invitation to <strong>begin again</strong>.</p>
-
-                        <p><strong>Final Words</strong></p>
-                        <p>Every struggle I've faced, every loss I've endured, and every success I've celebrated has reminded me of one thing:</p>
-                        <p><strong>Every breath is a second chance.</strong><br>
-                        A <strong>second chance</strong> to learn.<br>
-                        A <strong>second chance</strong> to grow.<br>
-                        A <strong>second chance</strong> to build the life you believe in.</p>
-
-                        <p><em>"Start small, remain focused, and always be ready to grow."<br>Jubel Mobela</em></p>
-                    `;
-                    bioContent.appendChild(fullBio);
-                }
+                btn.innerHTML = '<i class="fas fa-chevron-down"></i> Read full story';
             }
         }
 
-        // Form submission handler
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            closeModal();
-            event.target.reset();
-        }
+        // Modal
+        const modal = document.getElementById('contactModal');
+        window.showModal = function() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        window.closeModal = function() { modal.style.display = 'none'; document.body.style.overflow = ''; }
+        window.onclick = function(e) { if (e.target === modal) closeModal(); }
     </script>
 </body>
 </html>
-
